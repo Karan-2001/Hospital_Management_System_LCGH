@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">lion-nav-bar+homepage</string>
+    <string name="menu_home">Home</string>
+    <string name="menu_facilities">Facilities</string>
+    <string name="menu_doctors">Doctors</string>
+    <string name="menu_Book_Appointment">Book Appointment</string>
+    <string name="menu_covid">"Covid corner "</string>
+    <string name="menu_gallery">Gallary</string>
+    <string name="menu_about">About Us</string>
+    <string name="menu_contact">Contact Us</string>
+    <string name="menu_logout">logout</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_home_fragment">home_fragment</string>
+    <string name="hello_appointment_fragment">appointment fragment</string>
+    <string name="about_us">About us</string>
+    <string name="our_team">Our Team</string>
+</resources>

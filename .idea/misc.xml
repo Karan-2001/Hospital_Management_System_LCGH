@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="app/src/main/res/drawable-v24/ic_about_us_svgrepo_com.xml" value="0.1835" />
+        <entry key="app/src/main/res/drawable-v24/ic_baseline_home_24.xml" value="0.1835" />
+        <entry key="app/src/main/res/drawable-v24/ic_contacts_book_svgrepo_com.xml" value="0.1835" />
+        <entry key="app/src/main/res/drawable-v24/ic_menu_camera.xml" value="0.1835" />
+        <entry key="app/src/main/res/drawable/ic_about_us_svgrepo_com.xml" value="0.2065" />
+        <entry key="app/src/main/res/drawable/ic_appointment_book_svgrepo_com.xml" value="0.2065" />
+        <entry key="app/src/main/res/drawable/ic_baseline_home_24.xml" value="0.2065" />
+        <entry key="app/src/main/res/layout/about_us_dialog.xml" value="0.27304992675781253" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_about.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/fragment_appointment.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_contact.xml" value="0.34739583333333335" />
+        <entry key="app/src/main/res/layout/fragment_covid.xml" value="0.33242753623188404" />
+        <entry key="app/src/main/res/layout/fragment_doctors.xml" value="0.28804347826086957" />
+        <entry key="app/src/main/res/layout/fragment_facilities.xml" value="0.34739583333333335" />
+        <entry key="app/src/main/res/layout/fragment_gallery.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.4026268115942029" />
+        <entry key="app/src/main/res/layout/nav_header.xml" value="0.34739583333333335" />
+        <entry key="app/src/main/res/menu/menu.xml" value="0.27314814814814814" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
