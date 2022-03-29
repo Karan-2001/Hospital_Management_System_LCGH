@@ -3,10 +3,16 @@ package com.example.lion_nav_barhomepage
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
+import android.webkit.WebView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
+import com.example.lion_nav_barhomepage.Appointment.AppointmentFragment
+import com.example.lion_nav_barhomepage.Contact.ContactFragment
+import com.example.lion_nav_barhomepage.Gallery.GalleryFragment
+import com.example.lion_nav_barhomepage.about.AboutFragment
+import com.example.lion_nav_barhomepage.doctors.DoctorsFragment
 import com.google.android.material.navigation.NavigationView
 
 class MainActivity : AppCompatActivity() {
@@ -23,6 +29,8 @@ class MainActivity : AppCompatActivity() {
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+         replaceFragment(HomeFragment(),"Home")
+
         navView.setNavigationItemSelectedListener {
             it.isChecked=true
             when(it.itemId){

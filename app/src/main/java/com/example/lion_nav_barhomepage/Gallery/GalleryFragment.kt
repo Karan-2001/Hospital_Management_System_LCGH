@@ -1,4 +1,4 @@
-package com.example.lion_nav_barhomepage
+package com.example.lion_nav_barhomepage.Gallery
 
 import android.app.Dialog
 import android.os.Bundle
@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.GridView
 import androidx.fragment.app.Fragment
+import com.example.lion_nav_barhomepage.R
 import com.example.lion_nav_barhomepage.databinding.FragmentGalleryBinding
 
 // TODO: Rename parameter arguments, choose names that match
@@ -17,7 +18,8 @@ import com.example.lion_nav_barhomepage.databinding.FragmentGalleryBinding
 private var _binding:FragmentGalleryBinding? = null
 private val binding get() = _binding!!
 private lateinit var gridView: GridView
-var data: ArrayList<Int> = arrayListOf(R.drawable.img1,R.drawable.img2,R.drawable.imge,R.drawable.img4,R.drawable.img5
+var data_img: ArrayList<Int> = arrayListOf(
+    R.drawable.img1,R.drawable.img2,R.drawable.imge,R.drawable.img4,R.drawable.img5
 )
 
 /**
@@ -51,16 +53,16 @@ class GalleryFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         gridView = binding.PhotoGrid
-        gridView.adapter = ImageAdapter(data, this)
+        gridView.adapter = ImageAdapter(data_img, this)
         // gridView.setOnItemClickListener(AdapterView.OnItemClickListener(){
         //  fun onItemClick(
-        //  parent: AdapterView<*>,
-        //  view: View,
-        //   position: Int,
-        //   id: Long
-        //   ){
-        //     val item_pos: Int = data.get(position)
-        //  })
+         // parent: AdapterView<*>,
+       //  view: View,
+         // position: Int,
+         //  id: Long
+         //  ){
+           //  val item_pos: Int = data.get(position)
+       //   })
         //  }
 
 

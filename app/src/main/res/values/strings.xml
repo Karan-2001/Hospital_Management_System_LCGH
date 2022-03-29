@@ -17,4 +17,5 @@
     <string name="hello_appointment_fragment">appointment fragment</string>
     <string name="about_us">About us</string>
     <string name="our_team">Our Team</string>
+    <string name="Specialization">doctor spec</string>
 </resources>
