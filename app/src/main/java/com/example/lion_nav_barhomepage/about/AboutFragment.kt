@@ -1,4 +1,4 @@
-package com.example.lion_nav_barhomepage
+package com.example.lion_nav_barhomepage.about
 
 import android.annotation.SuppressLint
 import android.app.AlertDialog

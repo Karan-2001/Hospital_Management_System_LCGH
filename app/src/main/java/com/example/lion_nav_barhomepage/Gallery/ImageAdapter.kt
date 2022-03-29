@@ -1,4 +1,4 @@
-package com.example.lion_nav_barhomepage
+package com.example.lion_nav_barhomepage.Gallery
 
 import android.content.Context
 import android.view.View
