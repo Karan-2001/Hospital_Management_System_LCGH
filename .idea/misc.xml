@@ -13,23 +13,24 @@
         <entry key="app/src/main/res/drawable/ic_baseline_home_24.xml" value="0.2065" />
         <entry key="app/src/main/res/layout/about_us_dialog.xml" value="0.27304992675781253" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_test2.xml" value="0.18640444634459172" />
         <entry key="app/src/main/res/layout/card.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/doctor_card.xml" value="0.40424897745585764" />
-        <entry key="app/src/main/res/layout/doctors_profile.xml" value="0.26304626464843756" />
+        <entry key="app/src/main/res/layout/doctor_card.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/doctors_profile.xml" value="0.15218353271484375" />
         <entry key="app/src/main/res/layout/fragment_about.xml" value="0.335" />
-        <entry key="app/src/main/res/layout/fragment_appointment.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_appointment.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_contact.xml" value="0.34739583333333335" />
         <entry key="app/src/main/res/layout/fragment_covid.xml" value="0.33242753623188404" />
         <entry key="app/src/main/res/layout/fragment_doctors.xml" value="0.20174865722656252" />
-        <entry key="app/src/main/res/layout/fragment_doctors_profile.xml" value="0.2943161010742187" />
+        <entry key="app/src/main/res/layout/fragment_doctors_profile.xml" value="0.45" />
         <entry key="app/src/main/res/layout/fragment_facilities.xml" value="0.34739583333333335" />
         <entry key="app/src/main/res/layout/fragment_gallery.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.4026268115942029" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.1" />
         <entry key="app/src/main/res/layout/item_about.xml" value="0.3158173427634818" />
         <entry key="app/src/main/res/layout/item_avl.xml" value="0.521520141940961" />
-        <entry key="app/src/main/res/layout/item_lang.xml" value="0.36622839389408596" />
+        <entry key="app/src/main/res/layout/item_lang.xml" value="0.12885154061624648" />
         <entry key="app/src/main/res/layout/item_profile.xml" value="0.163714599609375" />
-        <entry key="app/src/main/res/layout/item_specialisation.xml" value="0.18535681186283595" />
+        <entry key="app/src/main/res/layout/item_specialisation.xml" value="0.1" />
         <entry key="app/src/main/res/layout/nav_header.xml" value="0.34739583333333335" />
         <entry key="app/src/main/res/menu/menu.xml" value="0.27314814814814814" />
       </map>

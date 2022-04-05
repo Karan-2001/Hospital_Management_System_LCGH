@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import com.example.lion_nav_barhomepage.R
 
 // TODO: Rename parameter arguments, choose names that match
@@ -36,6 +37,11 @@ class ContactFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_contact, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        (activity as AppCompatActivity).supportActionBar?.title="Contact Us "
+        super.onViewCreated(view, savedInstanceState)
     }
 
     companion object {

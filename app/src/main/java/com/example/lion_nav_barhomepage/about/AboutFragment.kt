@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 
 import android.widget.Button
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentActivity
 import com.example.lion_nav_barhomepage.databinding.FragmentAboutBinding
 
@@ -47,6 +48,7 @@ class AboutFragment : Fragment() {
         binding?.aboutBtn?.setOnClickListener{
              var dialog = CustomDialogFragment()
             dialog.show(childFragmentManager,"custom")
+            (activity as AppCompatActivity).supportActionBar?.title="About Us"
            // val myDialogView=LayoutInflater.from(this).inflate(R.layout.about_us_dialog,null)
            // val mBuilder = AlertDialog.Builder(requireContext())
            //     .setView(myDialogView)
