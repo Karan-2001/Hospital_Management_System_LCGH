@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.GridView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.lion_nav_barhomepage.R
 import com.example.lion_nav_barhomepage.databinding.FragmentGalleryBinding
@@ -54,6 +55,7 @@ class GalleryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         gridView = binding.PhotoGrid
         gridView.adapter = ImageAdapter(data_img, this)
+        (activity as AppCompatActivity).supportActionBar?.title="Gallery"
         // gridView.setOnItemClickListener(AdapterView.OnItemClickListener(){
         //  fun onItemClick(
          // parent: AdapterView<*>,

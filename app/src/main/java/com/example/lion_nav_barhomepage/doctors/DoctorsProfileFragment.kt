@@ -5,56 +5,69 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import androidx.activity.OnBackPressedCallback
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.activityViewModels
+import com.example.lion_nav_barhomepage.Appointment.AppointmentFragment
 import com.example.lion_nav_barhomepage.R
+import com.example.lion_nav_barhomepage.databinding.DoctorsProfileBinding
+import com.example.lion_nav_barhomepage.databinding.FragmentDoctorsBinding
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [DoctorsProfileFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
+
 class DoctorsProfileFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
+    private var _binding: DoctorsProfileBinding? = null
+    private val binding get() = _binding!!
+    private val viewModel: DoctorsViewModel by activityViewModels()
+    private lateinit var docname: TextView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+
+        //arguments?.let {
+         //   param1 = it.getString(ARG_PARAM1)
+          //  param2 = it.getString(ARG_PARAM2)
+       // }
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_doctors_profile, container, false)
+        _binding = DoctorsProfileBinding.inflate(inflater, container, false)
+        val view = binding.root
+        return view
+    }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        val doc : data? = viewModel.get_data()
+        docname = binding.name
+        docname.text=doc?.name.toString()
+        binding.docId.text= doc?.id.toString()
+        binding.spec.text=doc?.spec.toString()
+        binding.docExp.text=doc?.exp.toString()
+        binding.docEdu.text=doc?.about.toString()
+        binding.avl.text=doc?.avl.toString()
+        binding.lang.text=doc?.lang.toString()
+        (activity as AppCompatActivity).supportActionBar?.title="Doctors Profile"
+        binding.Back.setOnClickListener {
+            replaceFragment(DoctorsFragment())
+        }
+        binding.book.setOnClickListener {
+            replaceFragment(AppointmentFragment())
+        }
+    }
+ //override fun OnBackPressedCallback(){
+    //  replaceFragment(DoctorsFragment())
+
+ //}
+    fun replaceFragment(fragment: Fragment) {
+        val fragmentManager = parentFragmentManager
+        val fragmentTransaction = fragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.framelayout, fragment)
+        fragmentTransaction.commit()
+
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment DoctorsProfileFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            DoctorsProfileFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
+
+
 }
