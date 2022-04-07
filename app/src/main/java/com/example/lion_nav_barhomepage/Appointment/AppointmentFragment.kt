@@ -116,13 +116,7 @@ class AppointmentFragment : Fragment() {
         binding.confirm.setOnClickListener {
             val check = binding.avlSlots.isVisible
             Log.e("Check:","$check")
-            if (check==true) {
-                val dialogBuilder = AlertDialog.Builder(requireActivity())
-                dialogBuilder.setMessage("select appropriate data")
-                    .setCancelable(true)
-                val alert = dialogBuilder.create()
-                alert.show()
-            }
+
             if(doc==null || selecteddate=="" || slot==""){
 
                 val dialogBuilder = AlertDialog.Builder(requireActivity())
@@ -132,6 +126,13 @@ class AppointmentFragment : Fragment() {
                 alert.show()
 
 
+            }
+            else if (check==true) {
+                val dialogBuilder = AlertDialog.Builder(requireActivity())
+                dialogBuilder.setMessage("select appropriate data")
+                    .setCancelable(true)
+                val alert = dialogBuilder.create()
+                alert.show()
             }
 
             else {
