@@ -1,6 +1,8 @@
 package com.example.lion_nav_barhomepage.Home
 
+import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
+import android.view.CollapsibleActionView
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -16,6 +18,8 @@ import com.example.lion_nav_barhomepage.R
 import com.example.lion_nav_barhomepage.databinding.FragmentDoctorsBinding
 import com.example.lion_nav_barhomepage.databinding.FragmentHomeBinding
 import com.example.lion_nav_barhomepage.doctors.DoctorsFragment
+import com.google.android.material.appbar.CollapsingToolbarLayout
+import com.google.android.material.internal.CollapsingTextHelper
 import com.google.android.material.navigation.NavigationView
 
 // TODO: Rename parameter arguments, choose names that match
@@ -33,6 +37,8 @@ class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
     private lateinit var imageSlider: ImageSlider
+    private lateinit var animationDrawable: AnimationDrawable
+
 
 
 
@@ -52,6 +58,7 @@ class HomeFragment : Fragment() {
             _binding = FragmentHomeBinding.inflate(inflater, container, false)
             imageSlider=binding.imageSlider
             val imagelist = ArrayList<SlideModel>()
+
 
             imagelist.add(SlideModel(R.drawable.one))
             imagelist.add(SlideModel(R.drawable.img1))
@@ -73,6 +80,15 @@ class HomeFragment : Fragment() {
         binding.b3.setOnClickListener {
             replaceFragment(FacilitiesFragment())
         }
+
+        val collapsingToolbarLayout: CollapsingToolbarLayout = binding.collapsingToolbar
+        val animationDrawable = collapsingToolbarLayout.background as AnimationDrawable
+        animationDrawable.setEnterFadeDuration(2500)
+        animationDrawable.setExitFadeDuration(5000)
+        animationDrawable.setEnterFadeDuration(2500)
+        animationDrawable.start()
+
+
     }
 
     private fun replaceFragment(fragment: Fragment){

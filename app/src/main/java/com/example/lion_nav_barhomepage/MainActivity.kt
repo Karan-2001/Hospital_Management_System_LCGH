@@ -2,6 +2,7 @@ package com.example.lion_nav_barhomepage
 
 import android.os.Bundle
 import android.view.MenuItem
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
@@ -16,6 +17,7 @@ import com.example.lion_nav_barhomepage.Home.HomeFragment
 import com.example.lion_nav_barhomepage.about.AboutFragment
 import com.example.lion_nav_barhomepage.doctors.DoctorsFragment
 import com.example.lion_nav_barhomepage.doctors.DoctorsProfileFragment
+import com.example.lion_nav_barhomepage.patientdashboard.PatientProfileFragment
 import com.google.android.material.navigation.NavigationView
 
 class MainActivity : AppCompatActivity() {
@@ -27,6 +29,12 @@ class MainActivity : AppCompatActivity() {
 
         drawerLayout = findViewById(R.id.drawerLayout)
         val navView: NavigationView = findViewById(R.id.nav_view)
+        val headerLayout = navView.getHeaderView(0)
+
+        val nav_drawer_header = headerLayout.findViewById(R.id.profile) as LinearLayout
+        nav_drawer_header.setOnClickListener{
+            replaceFragment(PatientProfileFragment(),"Patient Profile")
+        }
 
         toggle = ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close)
         drawerLayout.addDrawerListener(toggle)
