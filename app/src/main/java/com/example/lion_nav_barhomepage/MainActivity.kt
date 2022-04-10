@@ -17,7 +17,7 @@ import com.example.lion_nav_barhomepage.Home.HomeFragment
 import com.example.lion_nav_barhomepage.about.AboutFragment
 import com.example.lion_nav_barhomepage.doctors.DoctorsFragment
 import com.example.lion_nav_barhomepage.doctors.DoctorsProfileFragment
-import com.example.lion_nav_barhomepage.patientdashboard.PatientProfileFragment
+import com.example.lion_nav_barhomepage.patientdashboard.*
 import com.google.android.material.navigation.NavigationView
 
 class MainActivity : AppCompatActivity() {
@@ -35,7 +35,6 @@ class MainActivity : AppCompatActivity() {
         nav_drawer_header.setOnClickListener{
             replaceFragment(PatientProfileFragment(),"Patient Profile")
         }
-
         toggle = ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close)
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
@@ -43,7 +42,7 @@ class MainActivity : AppCompatActivity() {
         replaceFragment(HomeFragment(), "Home")
 
         navView.setNavigationItemSelectedListener {
-            it.isChecked = true
+            setcheckbutton(it)
             when (it.itemId) {
                 R.id.nav_home -> replaceFragment(HomeFragment(), it.title.toString())
                 R.id.nav_Doctors -> replaceFragment(DoctorsFragment(), it.title.toString())
@@ -64,8 +63,28 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun replaceFragment(fragment: Fragment, title: String) {
+    private fun setcheckbutton(menuItem: MenuItem) {
+        menuItem.isChecked=false
+        val id = supportFragmentManager.findFragmentById(R.id.framelayout )
         val navView: NavigationView = findViewById(R.id.nav_view)
+        when (id) {
+//            is PatientProfileFragment -> menuItem.isChecked=false
+            is HomeFragment -> navView.setCheckedItem(R.id.nav_home)
+            is DoctorsFragment -> navView.setCheckedItem(R.id.nav_Doctors)
+            is DoctorsProfileFragment -> navView.setCheckedItem(R.id.nav_Doctors)
+            is FacilitiesFragment -> navView.setCheckedItem(R.id.nav_facilities)
+            is CovidFragment -> navView.setCheckedItem(R.id.nav_covid)
+            is AboutFragment -> navView.setCheckedItem(R.id.nav_about)
+            is ContactFragment -> navView.setCheckedItem(R.id.nav_Contact)
+            is GalleryFragment -> navView.setCheckedItem(R.id.nav_gallery)
+            is AppointmentFragment -> navView.setCheckedItem(R.id.nav_appointments)
+            else -> menuItem.isChecked=false
+        }
+
+    }
+
+    fun replaceFragment(fragment: Fragment, title: String) {
+
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.framelayout, fragment)
@@ -73,17 +92,7 @@ class MainActivity : AppCompatActivity() {
         fragmentTransaction.commit()
         drawerLayout.closeDrawers()
 //        setTitle(title)
-        when (title) {
-            "Home" -> navView.setCheckedItem(R.id.nav_home)
-            "Doctors" -> navView.setCheckedItem(R.id.nav_Doctors)
-            "Facilities" -> navView.setCheckedItem(R.id.nav_facilities)
-            "Covid Corner" -> navView.setCheckedItem(R.id.nav_covid)
-            "About Us" -> navView.setCheckedItem(R.id.nav_about)
-            "Contact Us" -> navView.setCheckedItem(R.id.nav_Contact)
-            "Gallery" -> navView.setCheckedItem(R.id.nav_gallery)
-            "Book Appointment" -> navView.setCheckedItem(R.id.nav_appointments)
-            "Doctor Profile" -> navView.setCheckedItem(R.id.nav_facilities)
-        }
+//
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -94,13 +103,25 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        when (supportFragmentManager.findFragmentById(R.id.framelayout)) {
-
-            is DoctorsProfileFragment -> replaceFragment(DoctorsFragment(), "Doctors")
-            !is HomeFragment -> replaceFragment(HomeFragment(), "Home")
-            else -> super.onBackPressed()
+        val id = supportFragmentManager.findFragmentById(R.id.framelayout )
+        if( id  is PatientAppointmentsFragment ||
+            id  is  VaccinesFragment||
+            id  is ReportsFragment ||
+            id  is HistoryFragment ||
+            id  is  DiagnosisFragment||
+            id  is MedicinesFragment ||
+            id is EditProfileFragment    ){
+            replaceFragment(PatientProfileFragment(),"Patient Profile")
+        }
+        else if(id is DoctorsProfileFragment){
+            replaceFragment(DoctorsFragment(), "Doctors")
 
         }
+        else if (id !is HomeFragment){
+            replaceFragment(HomeFragment(), "Home")
+        }
+        else {super.onBackPressed()}
+
 //        override fun onBackPressed() {
 //            val count = supportFragmentManager.backStackEntryCount
 //            if (count == 0) {

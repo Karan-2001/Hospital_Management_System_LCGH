@@ -18,7 +18,7 @@
         <entry key="app/src/main/res/drawable/morning3.xml" value="0.1008392333984375" />
         <entry key="app/src/main/res/drawable/patient_gradient.xml" value="0.181" />
         <entry key="app/src/main/res/layout/about_us_dialog.xml" value="0.27304992675781253" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_test2.xml" value="0.18640444634459172" />
         <entry key="app/src/main/res/layout/card.xml" value="0.1" />
         <entry key="app/src/main/res/layout/confirm_apt_dialog.xml" value="0.1" />
@@ -33,7 +33,9 @@
         <entry key="app/src/main/res/layout/fragment_facilities.xml" value="0.34739583333333335" />
         <entry key="app/src/main/res/layout/fragment_gallery.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.40182189941406254" />
-        <entry key="app/src/main/res/layout/fragment_patient_profile.xml" value="0.35135262229225844" />
+        <entry key="app/src/main/res/layout/fragment_medicines.xml" value="0.2851646002565199" />
+        <entry key="app/src/main/res/layout/fragment_patient_profile.xml" value="0.2590873024680397" />
+        <entry key="app/src/main/res/layout/fragment_reports.xml" value="0.26849080803762293" />
         <entry key="app/src/main/res/layout/item_about.xml" value="0.3158173427634818" />
         <entry key="app/src/main/res/layout/item_avl.xml" value="0.521520141940961" />
         <entry key="app/src/main/res/layout/item_lang.xml" value="0.12885154061624648" />

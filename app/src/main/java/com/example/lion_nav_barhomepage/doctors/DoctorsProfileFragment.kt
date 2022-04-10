@@ -40,13 +40,18 @@ class DoctorsProfileFragment : Fragment() {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val doc : data? = viewModel.get_data()
+
         docname = binding.name
         docname.text=doc?.name.toString()
         binding.docId.text= doc?.id.toString()
         binding.spec.text=doc?.spec.toString()
         binding.docExp.text=doc?.exp.toString()
         binding.docEdu.text=doc?.about.toString()
-        binding.avl.text=doc?.avl.toString()
+        if (doc != null) {
+            viewModel.setavl(doc.avl)
+        }
+        val avl : String = viewModel.text
+        binding.avl.text=avl
         binding.lang.text=doc?.lang.toString()
         (activity as AppCompatActivity).supportActionBar?.title="Doctors Profile"
         binding.Back.setOnClickListener {
