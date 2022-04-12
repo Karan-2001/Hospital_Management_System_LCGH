@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "662029377263",
+    "project_id": "lionsapp-669e3",
+    "storage_bucket": "lionsapp-669e3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:662029377263:android:305b60675528842be8051a",
+        "android_client_info": {
+          "package_name": "com.example.lion_nav_barhomepage"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "662029377263-70jht32rpf8h5fmkkh93kkv7b8da4hpi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD9wHWT_eUfjRr_etSxAhzGz7vPAcAdzzw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "662029377263-70jht32rpf8h5fmkkh93kkv7b8da4hpi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
