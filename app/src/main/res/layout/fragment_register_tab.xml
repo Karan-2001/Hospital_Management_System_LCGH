@@ -4,7 +4,8 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".RegisterTabFragment">
+    tools:context=".RegisterTabFragment"
+    android:id="@+id/constraint">
 
     <EditText
         android:id="@+id/sign_name"
@@ -24,12 +25,13 @@
         app:layout_constraintWidth_percent=".8" />
 
     <EditText
-        android:id="@+id/sign_email"
+        android:id="@+id/sign_phone"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:background="@drawable/edittext"
-        android:hint="Email"
+        android:hint="Phone"
+        android:inputType="phone"
         android:paddingLeft="20dp"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
@@ -42,12 +44,12 @@
         app:layout_constraintWidth_percent=".8" />
 
     <EditText
-        android:id="@+id/sign_pass"
+        android:id="@+id/sign_email"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="17dp"
         android:background="@drawable/edittext"
-        android:hint="Password"
+        android:hint="Email"
         android:paddingLeft="20dp"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
@@ -55,24 +57,25 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sign_email"
+        app:layout_constraintTop_toBottomOf="@+id/sign_phone"
         app:layout_constraintVertical_bias="0.0"
         app:layout_constraintWidth_percent=".8" />
 
     <EditText
-        android:id="@+id/sign_cpass"
+        android:id="@+id/sign_pass"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="17dp"
         android:background="@drawable/edittext"
-        android:hint="Confirm Password"
+        android:hint="Password"
+        android:inputType="textPassword"
         android:paddingLeft="20dp"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
         android:textColorHint="#053D8E"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sign_pass"
+        app:layout_constraintTop_toBottomOf="@+id/sign_email"
         app:layout_constraintWidth_percent=".8" />
 
     <androidx.appcompat.widget.AppCompatButton
@@ -87,7 +90,7 @@
         app:layout_constraintBottom_toTopOf="@id/progressBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sign_cpass"
+        app:layout_constraintTop_toBottomOf="@+id/sign_pass"
         app:layout_constraintVertical_bias="0.691"
         app:layout_constraintWidth_percent=".8" />
     <ProgressBar

@@ -8,9 +8,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import com.example.lion_nav_barhomepage.Home.HomeFragment
 import com.example.lion_nav_barhomepage.databinding.FragmentDoctorsBinding
 import com.example.lion_nav_barhomepage.databinding.FragmentRegisterTabBinding
+import com.google.android.material.tabs.TabLayout
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -23,12 +26,16 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class RegisterTabFragment : Fragment() {
+
     private lateinit var auth: FirebaseAuth
-      private var _binding: FragmentRegisterTabBinding? = null
-       private val binding get() = _binding!!
+
+    //    private lateinit var db: FirebaseFirestore
+    private var _binding: FragmentRegisterTabBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         auth = FirebaseAuth.getInstance()
+//        db = FirebaseFirestore.getInstance()
         super.onCreate(savedInstanceState)
 
     }
@@ -45,16 +52,24 @@ class RegisterTabFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        binding.signup.setOnClickListener {
-            signUpUser()
-        }
         super.onViewCreated(view, savedInstanceState)
+        binding.signup.setOnClickListener {
+       signUpUser()
+        }
+
+
 
     }
-    fun signUpUser() {
+    private fun signUpUser() {
+
         if (binding.signName.text.toString().isEmpty()) {
             binding.signName.error = "Please enter email"
             binding.signName.requestFocus()
+            return
+        }
+        if (binding.signPhone.text.toString().isEmpty()) {
+            binding.signPhone.error = "Please enter email"
+            binding.signPhone.requestFocus()
             return
         }
         if (binding.signEmail.text.toString().isEmpty()) {
@@ -74,29 +89,33 @@ class RegisterTabFragment : Fragment() {
             binding.signPass.requestFocus()
             return
         }
-        if (binding.signCpass.text.toString()!=binding.signPass.text.toString()) {
-            binding.signCpass.error = "password not the same"
-            binding.signCpass.requestFocus()
-            return
-        }
 
         auth.createUserWithEmailAndPassword(binding.signEmail.text.toString(), binding.signPass.text.toString())
-            .addOnCompleteListener() { task ->
-                if (task.isSuccessful) {
-                    replaceFragment(LoginTabFragment())
+            .addOnCompleteListener(this.requireActivity()) { task ->
 
-                } else {
-                    Toast.makeText(context, "Sign Up failed. Try again after some time.",
-                        Toast.LENGTH_SHORT).show()
+                            if (task.isSuccessful) {
+                                Toast.makeText(
+                                    this.context, "Registration Successful", Toast.LENGTH_SHORT).show()
+
+
+
+                            }
+
+                 else{
+                    Toast.makeText(
+                        this.context, "Sign Up failed. Try again after some time.",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
     }
     fun replaceFragment(fragment: Fragment) {
         val fragmentManager = parentFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.framelayout, fragment)
+        fragmentTransaction.replace(R.id.constraint, fragment)
         fragmentTransaction.commit()
 
     }
-
 }
+
+
