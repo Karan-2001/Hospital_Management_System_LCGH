@@ -58,7 +58,8 @@ class LoginTabFragment : Fragment() {
                     .addOnCompleteListener(this.requireActivity()) { task ->
                         if (task.isSuccessful) {
                             Toast.makeText(this.context, "Logged in", Toast.LENGTH_LONG).show()
-                            replaceFragment(HomeFragment())
+                            val intent = Intent(this.context, MainActivity::class.java)
+                                startActivity(intent)
                         } else {
                             Toast.makeText(this.context, "Wrong Details", Toast.LENGTH_LONG).show()
                         }
@@ -71,17 +72,6 @@ class LoginTabFragment : Fragment() {
     }
 
 
-
-
-
-
-    fun replaceFragment(fragment: Fragment) {
-        val fragmentManager = parentFragmentManager
-        val fragmentTransaction = fragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.constraint, fragment)
-        fragmentTransaction.commit()
-
-    }
 
  fun checking():Boolean
 {
@@ -100,63 +90,4 @@ class LoginTabFragment : Fragment() {
 
 
 
-
-//private fun doLogin() {
-//    if (binding.email.text.toString().isEmpty()) {
-//        binding.email.error = "Please enter email"
-//        binding.email.requestFocus()
-//        return
-//    }
-//
-//    if (!Patterns.EMAIL_ADDRESS.matcher(binding.email.text.toString()).matches()) {
-//        binding.email.error = "Please enter valid email"
-//        binding.email.requestFocus()
-//        return
-//    }
-//
-//    if (binding.signPass.text.toString().isEmpty()) {
-//        binding.signPass.error = "Please enter password"
-//        binding.signPass.requestFocus()
-//        return
-//    }
-//
-//    auth.signInWithEmailAndPassword(binding.email.text.toString(), binding.signPass.text.toString())
-//        .addOnCompleteListener(this.requireActivity()) { task ->
-//            if (task.isSuccessful) {
-//                val user = auth.currentUser
-//                updateUI(user)
-//            } else {
-//
-//                updateUI(null)
-//            }
-//        }
-//}
-//
-//override fun onStart() {
-//    super.onStart()
-//    val currentUser = auth.currentUser
-//    updateUI(currentUser)
-//}
-//
-//private fun updateUI(currentUser: FirebaseUser?) {
-//
-//    if (currentUser != null) {
-//        if(currentUser.isEmailVerified) {
-//            Toast.makeText(
-//                context, "current",
-//                Toast.LENGTH_SHORT
-//            ).show()
-//        }else{
-//            Toast.makeText(
-//                context, "Please verify your email address.",
-//                Toast.LENGTH_SHORT
-//            ).show()
-//        }
-//    } else {
-//        Toast.makeText(
-//            context, "Login failed.",
-//            Toast.LENGTH_SHORT
-//        ).show()
-//    }
-//}
 

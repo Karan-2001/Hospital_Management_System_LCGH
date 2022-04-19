@@ -29,13 +29,14 @@ class RegisterTabFragment : Fragment() {
 
     private lateinit var auth: FirebaseAuth
 
-    //    private lateinit var db: FirebaseFirestore
+
+        private lateinit var db: FirebaseFirestore
     private var _binding: FragmentRegisterTabBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         auth = FirebaseAuth.getInstance()
-//        db = FirebaseFirestore.getInstance()
+        db = FirebaseFirestore.getInstance()
         super.onCreate(savedInstanceState)
 
     }
@@ -54,8 +55,10 @@ class RegisterTabFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.signup.setOnClickListener {
-       signUpUser()
+            signUpUser()
         }
+
+
 
 
 
@@ -89,32 +92,47 @@ class RegisterTabFragment : Fragment() {
             binding.signPass.requestFocus()
             return
         }
+        var email = binding.signEmail.text.toString()
+        var password = binding.signPass.text.toString()
+        var name = binding.signName.text.toString()
+        var phone = binding.signPhone.text.toString()
+        var user = hashMapOf(
+            "Name" to name,
+            "Phone" to phone,
+            "Email" to email
+        )
+        val users = db.collection("USERS")
+        val query = users.whereEqualTo("Email",email).get()
 
         auth.createUserWithEmailAndPassword(binding.signEmail.text.toString(), binding.signPass.text.toString())
-            .addOnCompleteListener(this.requireActivity()) { task ->
+            .addOnSuccessListener {
+                users.document(email).set(user)
+                Toast.makeText(
+                                   this.context, "Registration Successful", Toast.LENGTH_SHORT).show()
 
-                            if (task.isSuccessful) {
-                                Toast.makeText(
-                                    this.context, "Registration Successful", Toast.LENGTH_SHORT).show()
-
-
-
-                            }
-
-                 else{
-                    Toast.makeText(
-                        this.context, "Sign Up failed. Try again after some time.",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
+                view_Pager.setCurrentItem(1)
             }
-    }
-    fun replaceFragment(fragment: Fragment) {
-        val fragmentManager = parentFragmentManager
-        val fragmentTransaction = fragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.constraint, fragment)
-        fragmentTransaction.commit()
-
+            .addOnFailureListener {Toast.makeText(
+                        this.context, "Sign Up failed.Email already exists.",
+                        Toast.LENGTH_SHORT
+                    ).show()  }
+//            .addOnCompleteListener(this.requireActivity()) { task ->
+//
+//                            if (task.isSuccessful) {
+////                                Toast.makeText(
+////                                    this.context, "Registration Successful", Toast.LENGTH_SHORT).show()
+//
+//                                val intent = Intent(this.context, MainActivity::class.java)
+//                                startActivity(intent)
+//                            }
+//
+//                 else{
+//                    Toast.makeText(
+//                        this.context, "Sign Up failed. Try again after some time.",
+//                        Toast.LENGTH_SHORT
+//                    ).show()
+//                }
+//            }
     }
 }
 
