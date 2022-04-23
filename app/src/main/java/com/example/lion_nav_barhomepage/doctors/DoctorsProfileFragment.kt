@@ -48,7 +48,7 @@ class DoctorsProfileFragment : Fragment() {
         binding.docExp.text=doc?.exp.toString()
         binding.docEdu.text=doc?.about.toString()
         if (doc != null) {
-            viewModel.setavl(doc.avl)
+            viewModel.setavl(doc.avl!!)
         }
         val avl : String = viewModel.text
         binding.avl.text=avl

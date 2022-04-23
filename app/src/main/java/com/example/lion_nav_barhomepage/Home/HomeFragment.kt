@@ -8,7 +8,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.activityViewModels
 import com.denzcoskun.imageslider.ImageSlider
 import com.denzcoskun.imageslider.constants.ScaleTypes
 import com.denzcoskun.imageslider.models.SlideModel
@@ -18,6 +20,9 @@ import com.example.lion_nav_barhomepage.R
 import com.example.lion_nav_barhomepage.databinding.FragmentDoctorsBinding
 import com.example.lion_nav_barhomepage.databinding.FragmentHomeBinding
 import com.example.lion_nav_barhomepage.doctors.DoctorsFragment
+import com.example.lion_nav_barhomepage.patientData
+import com.example.lion_nav_barhomepage.patientViewModel
+import com.example.lion_nav_barhomepage.patientdata
 import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.google.android.material.internal.CollapsingTextHelper
 import com.google.android.material.navigation.NavigationView
@@ -37,6 +42,7 @@ class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
     private lateinit var imageSlider: ImageSlider
+    val viewModel: patientViewModel by activityViewModels()
     private lateinit var animationDrawable: AnimationDrawable
 
 
@@ -71,6 +77,7 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         (activity as AppCompatActivity).supportActionBar?.title="Home"
+        binding.pName.setText(patientData.name.toString())
         binding.b1.setOnClickListener {
             replaceFragment(DoctorsFragment())
         }

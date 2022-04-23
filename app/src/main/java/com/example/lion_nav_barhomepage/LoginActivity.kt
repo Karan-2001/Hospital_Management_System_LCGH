@@ -2,6 +2,7 @@ package com.example.lion_nav_barhomepage
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 
 import androidx.appcompat.app.AppCompatActivity
@@ -15,16 +16,16 @@ lateinit var context_activity : Context
 lateinit var fm: FragmentManager
 var count: Int =0
 lateinit  var view_Pager: ViewPager
+ lateinit var sharedPreferences: SharedPreferences
 
 class LoginActivity : AppCompatActivity() {
-
-
 
 
     override fun onCreate(savedInstancesState: Bundle?) {
         super.onCreate(savedInstancesState)
         setContentView(R.layout.activity_login)
 
+        sharedPreferences=getSharedPreferences("login", MODE_PRIVATE)
         val v=0.0f
         val tabLayout: TabLayout = findViewById(R.id.tab)
         val fb: FloatingActionButton = findViewById(R.id.facebook)

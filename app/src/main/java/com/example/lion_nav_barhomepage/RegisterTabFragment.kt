@@ -2,6 +2,7 @@ package com.example.lion_nav_barhomepage
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.util.Patterns
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -33,7 +34,10 @@ class RegisterTabFragment : Fragment() {
         private lateinit var db: FirebaseFirestore
     private var _binding: FragmentRegisterTabBinding? = null
     private val binding get() = _binding!!
-
+    var email = ""
+    var password = ""
+    var name = ""
+    var phone = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         auth = FirebaseAuth.getInstance()
         db = FirebaseFirestore.getInstance()
@@ -54,7 +58,9 @@ class RegisterTabFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         binding.signup.setOnClickListener {
+            getdata()
             signUpUser()
         }
 
@@ -63,7 +69,8 @@ class RegisterTabFragment : Fragment() {
 
 
     }
-    private fun signUpUser() {
+
+    private fun getdata() {
 
         if (binding.signName.text.toString().isEmpty()) {
             binding.signName.error = "Please enter email"
@@ -92,19 +99,29 @@ class RegisterTabFragment : Fragment() {
             binding.signPass.requestFocus()
             return
         }
-        var email = binding.signEmail.text.toString()
-        var password = binding.signPass.text.toString()
-        var name = binding.signName.text.toString()
-        var phone = binding.signPhone.text.toString()
+
+        email = binding.signEmail.text.toString()
+        password = binding.signPass.text.toString()
+        name = binding.signName.text.toString()
+        phone = binding.signPhone.text.toString()
+        Log.e("check","$email--->$password--->$name--->$phone")
+    }
+
+    private fun signUpUser() {
+
         var user = hashMapOf(
             "Name" to name,
             "Phone" to phone,
-            "Email" to email
+            "Email" to email,
+            "Id" to "0",
+            "Dob" to "",
+            "Img_url" to "",
+            "Gender" to ""
         )
         val users = db.collection("USERS")
         val query = users.whereEqualTo("Email",email).get()
-
-        auth.createUserWithEmailAndPassword(binding.signEmail.text.toString(), binding.signPass.text.toString())
+        Log.e("check","$user")
+        auth.createUserWithEmailAndPassword(email, password)
             .addOnSuccessListener {
                 users.document(email).set(user)
                 Toast.makeText(
@@ -115,24 +132,10 @@ class RegisterTabFragment : Fragment() {
             .addOnFailureListener {Toast.makeText(
                         this.context, "Sign Up failed.Email already exists.",
                         Toast.LENGTH_SHORT
-                    ).show()  }
-//            .addOnCompleteListener(this.requireActivity()) { task ->
-//
-//                            if (task.isSuccessful) {
-////                                Toast.makeText(
-////                                    this.context, "Registration Successful", Toast.LENGTH_SHORT).show()
-//
-//                                val intent = Intent(this.context, MainActivity::class.java)
-//                                startActivity(intent)
-//                            }
-//
-//                 else{
-//                    Toast.makeText(
-//                        this.context, "Sign Up failed. Try again after some time.",
-//                        Toast.LENGTH_SHORT
-//                    ).show()
-//                }
-//            }
+                    ).show()
+
+            }
+
     }
 }
 

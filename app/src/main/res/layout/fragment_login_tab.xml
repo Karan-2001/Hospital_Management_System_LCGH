@@ -19,7 +19,7 @@
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
         android:textColorHint="#053D8E"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/sign_pass"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -30,6 +30,7 @@
         android:id="@+id/sign_pass"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
         android:background="@drawable/edittext"
         android:hint="Password"
         android:inputType="textPassword"
@@ -37,14 +38,11 @@
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
         android:textColorHint="#053D8E"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/forgot"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/email"
-        app:layout_constraintVertical_bias="0.085"
         app:layout_constraintWidth_percent=".8" />
-    //app:layout_marginTop="20dp"
-    />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/signup"
@@ -58,11 +56,12 @@
         app:layout_constraintBottom_toTopOf="@id/progressBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sign_pass"
+        app:layout_constraintTop_toBottomOf="@+id/forgot"
         app:layout_constraintVertical_bias=".7"
         app:layout_constraintWidth_percent=".8" />
 
     <TextView
+        android:id="@+id/forgot"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="23dp"

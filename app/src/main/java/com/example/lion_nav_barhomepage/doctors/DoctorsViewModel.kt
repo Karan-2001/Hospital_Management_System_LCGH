@@ -21,7 +21,7 @@ class DoctorsViewModel: ViewModel() {
 //     Log.e("print:::::","${get_data()}")
     }
     fun set_data(){
-        _doctors.value=Helper.doc_list()
+        _doctors.value= DoctorList
     }
     fun get_data(): data?
     {

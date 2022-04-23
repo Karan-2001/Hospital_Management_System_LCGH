@@ -60,7 +60,7 @@ class AppointmentFragment : Fragment() {
         var dayOfWeek: Int=0
         var selecteddate : String =""
         if (doc != null) {
-            viewModel.setavl(doc.avl)
+            doc.avl?.let { viewModel.setavl(it) }
         }
         val avl : String = viewModel.text
         if( doc != null) {
@@ -136,7 +136,7 @@ class AppointmentFragment : Fragment() {
             }
 
             else {
-                viewModel1.set_data(doc.name,selecteddate,slot)
+                viewModel1.set_data(doc.name!!,selecteddate,slot)
                 var dialog = ConfirmDialogFragment()
                 dialog.show(childFragmentManager,"custom")
             }
@@ -186,7 +186,7 @@ class AppointmentFragment : Fragment() {
         val week = doc?.avl
 
         if (week!=null) {
-            val slots = doc.timeslots[dayOfWeek - 1]
+            val slots = doc.timeslots!![dayOfWeek - 1]
             if (week.indexOf(dayOfWeek) != -1) {
                 binding.avlSlots.isVisible=false
                 if (slots[0] == 1){

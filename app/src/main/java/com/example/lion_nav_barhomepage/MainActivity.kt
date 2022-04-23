@@ -1,13 +1,19 @@
 package com.example.lion_nav_barhomepage
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.widget.LinearLayout
+import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.ViewModel
 import com.example.lion_nav_barhomepage.Appointment.AppointmentFragment
 import com.example.lion_nav_barhomepage.Contact.ContactFragment
 import com.example.lion_nav_barhomepage.Covid.CovidFragment
@@ -17,6 +23,7 @@ import com.example.lion_nav_barhomepage.Home.HomeFragment
 import com.example.lion_nav_barhomepage.about.AboutFragment
 import com.example.lion_nav_barhomepage.doctors.DoctorsFragment
 import com.example.lion_nav_barhomepage.doctors.DoctorsProfileFragment
+import com.example.lion_nav_barhomepage.doctors.DoctorsViewModel
 import com.example.lion_nav_barhomepage.patientdashboard.*
 import com.google.android.material.navigation.NavigationView
 
@@ -26,12 +33,19 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+         val viewModel: patientViewModel by viewModels()
 
         drawerLayout = findViewById(R.id.drawerLayout)
         val navView: NavigationView = findViewById(R.id.nav_view)
         val headerLayout = navView.getHeaderView(0)
 
         val nav_drawer_header = headerLayout.findViewById(R.id.profile) as LinearLayout
+        val username = headerLayout.findViewById(R.id.user_name) as TextView
+        val useremail = headerLayout.findViewById(R.id.user_email) as TextView
+//        viewModel.set_patientdata()
+        Log.e("In main ::","${patientData}")
+        username.setText(patientData.name.toString())
+        useremail.setText(patientData.email.toString())
         nav_drawer_header.setOnClickListener{
             replaceFragment(PatientProfileFragment(),"Patient Profile")
         }
@@ -51,16 +65,25 @@ class MainActivity : AppCompatActivity() {
                 R.id.nav_Contact -> replaceFragment(ContactFragment(), it.title.toString())
                 R.id.nav_gallery -> replaceFragment(GalleryFragment(), it.title.toString())
                 R.id.nav_covid -> replaceFragment(CovidFragment(), it.title.toString())
-                R.id.nav_logout -> Toast.makeText(
-                    applicationContext,
-                    "logging out from account",
-                    Toast.LENGTH_SHORT
-                ).show()
+                R.id.nav_logout -> logout()
+
                 R.id.nav_about -> replaceFragment(AboutFragment(), it.title.toString())
 
             }
             true
         }
+    }
+
+    private fun logout() {
+        sharedPreferences = getSharedPreferences("login", MODE_PRIVATE)
+        sharedPreferences.edit().putBoolean("logged",false).apply()
+        Toast.makeText(
+            applicationContext,
+            "logging out from account",
+            Toast.LENGTH_SHORT
+        ).show()
+        val intent = Intent(this, IntroActivity::class.java)
+        startActivity(intent)
     }
 
     private fun setcheckbutton(menuItem: MenuItem) {

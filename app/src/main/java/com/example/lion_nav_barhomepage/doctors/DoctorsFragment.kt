@@ -1,5 +1,6 @@
 package com.example.lion_nav_barhomepage.doctors
 
+import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -21,6 +22,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lion_nav_barhomepage.R
 import com.example.lion_nav_barhomepage.databinding.FragmentDoctorsBinding
+import com.google.firebase.database.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -33,8 +35,11 @@ private const val ARG_PARAM2 = "param2"
  * Use the [DoctorsFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
+lateinit var DoctorList : ArrayList<data>
 class DoctorsFragment : Fragment() ,DoctorsAdapter.Click ,DoctorsAdapter.replace{
     private var _binding: FragmentDoctorsBinding? = null
+    private lateinit var dbref : DatabaseReference
+
     private val binding get() = _binding!!
     private lateinit var recyclerView: RecyclerView
     private lateinit var search: EditText
@@ -68,9 +73,30 @@ class DoctorsFragment : Fragment() ,DoctorsAdapter.Click ,DoctorsAdapter.replace
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        DoctorList = arrayListOf<data>()
+        dbref = FirebaseDatabase.getInstance().getReference("Doctors")
+        dbref.addValueEventListener( object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if(snapshot.exists()){
+                    for (Doctorsnap in snapshot.children){
+                        val doctor= Doctorsnap.getValue(data::class.java)
+                        DoctorList.add(doctor!!)
+
+                    }
+
+                    recyclerView.adapter = DoctorsAdapter(this@DoctorsFragment, DoctorList, this@DoctorsFragment,this@DoctorsFragment)
+                }
+
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        })
         recyclerView = binding.RecyclerView
         search = binding.sampleEditText
-        recyclerView.adapter = DoctorsAdapter(this, Helper.doc_list(), this,this)
+
         myview = view
         viewModel.set_data()
         (activity as AppCompatActivity).supportActionBar?.title="Doctors"
@@ -97,7 +123,7 @@ class DoctorsFragment : Fragment() ,DoctorsAdapter.Click ,DoctorsAdapter.replace
     fun filter(text: String) {
         val filtered: ArrayList<data> = ArrayList()
 
-        val courseAry: ArrayList<data> = Helper.doc_list()
+        val courseAry: ArrayList<data> = DoctorList
 
         for (eachCourse in courseAry) {
             if (eachCourse.name!!.toLowerCase()
