@@ -17,14 +17,19 @@ class DoctorsViewModel: ViewModel() {
     fun setposition(position: Int){
         _pos.value=position
 
-        Log.e("on","${doctors.value?.get(position)}")
+//        Log.e("on","${doctors.value?.get(position)}")
 //     Log.e("print:::::","${get_data()}")
     }
     fun set_data(){
         _doctors.value= DoctorList
+
     }
+
     fun get_data(): data?
     {
+        if(_pos.value == -1){
+            return null
+        }
         return _pos.value?.let { _doctors.value?.get(it )}
     }
     fun setavl(avl:List<Int>) {

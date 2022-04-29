@@ -7,19 +7,19 @@
     android:layout_marginTop="16dp"
     android:background="@color/white">
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id='@+id/picture'
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:id='@+id/userimg'
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_marginLeft="20dp"/>
 
     <TextView
         android:id="@+id/user_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="8dp"
         android:layout_marginLeft="20dp"
+        android:paddingTop="8dp"
         android:text="name"
-        android:textColor="@color/black"
+        android:textColor="#000000"
         android:textSize="20dp"
         android:textStyle="bold" />
 

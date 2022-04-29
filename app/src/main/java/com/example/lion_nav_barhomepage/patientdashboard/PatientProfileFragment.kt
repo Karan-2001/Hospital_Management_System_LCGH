@@ -1,15 +1,22 @@
 package com.example.lion_nav_barhomepage.patientdashboard
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.net.toUri
+import coil.load
+import com.example.lion_nav_barhomepage.IntroActivity
 import com.example.lion_nav_barhomepage.R
 import com.example.lion_nav_barhomepage.databinding.DoctorsProfileBinding
 import com.example.lion_nav_barhomepage.databinding.FragmentPatientProfileBinding
 import com.example.lion_nav_barhomepage.doctors.DoctorsAdapter
+import com.example.lion_nav_barhomepage.patient_main_data
+import com.example.lion_nav_barhomepage.sharedPreferences
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -62,6 +69,23 @@ class PatientProfileFragment : Fragment() {
         binding.editButton.setOnClickListener {
             replaceFragment(EditProfileFragment())
         }
+        binding.logoutButton.setOnClickListener {
+            logout()
+        }
+        binding.pname.setText( patient_main_data.name)
+        binding.pemail.setText( patient_main_data.email)
+        binding.pid.setText( patient_main_data.id)
+        val img_url= patient_main_data.img_url.toString()
+        if (img_url == ""){
+            binding.pimg.setImageResource(R.drawable.user_icon)
+        }
+        else {
+            binding.pimg
+                .load(img_url?.toUri()) {
+                    placeholder(R.drawable.loading_animation)
+                    error(R.drawable.ic_broken_image)
+                }
+        }
         super.onViewCreated(view, savedInstanceState)
 
     }
@@ -72,6 +96,17 @@ class PatientProfileFragment : Fragment() {
         fragmentTransaction.replace(R.id.framelayout, fragment)
         fragmentTransaction.commit()
 
+    }
+    private fun logout() {
+        sharedPreferences = this.requireActivity().getSharedPreferences("login", AppCompatActivity.MODE_PRIVATE)
+        sharedPreferences.edit().putBoolean("logged",false).apply()
+        Toast.makeText(
+            context,
+            "logging out from account",
+            Toast.LENGTH_SHORT
+        ).show()
+        val intent = Intent(this.context, IntroActivity::class.java)
+        startActivity(intent)
     }
 
 }

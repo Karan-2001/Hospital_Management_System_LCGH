@@ -1,5 +1,6 @@
 package com.example.lion_nav_barhomepage.doctors
 
+import android.app.ProgressDialog
 import android.content.Context
 import android.os.Bundle
 import android.text.Editable
@@ -73,10 +74,15 @@ class DoctorsFragment : Fragment() ,DoctorsAdapter.Click ,DoctorsAdapter.replace
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        val progressDialog = ProgressDialog(context)
+        progressDialog.setMessage("Fetching data....")
+        progressDialog.setCancelable(false)
+        progressDialog.show()
         DoctorList = arrayListOf<data>()
         dbref = FirebaseDatabase.getInstance().getReference("Doctors")
         dbref.addValueEventListener( object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
+
                 if(snapshot.exists()){
                     for (Doctorsnap in snapshot.children){
                         val doctor= Doctorsnap.getValue(data::class.java)
@@ -85,6 +91,7 @@ class DoctorsFragment : Fragment() ,DoctorsAdapter.Click ,DoctorsAdapter.replace
                     }
 
                     recyclerView.adapter = DoctorsAdapter(this@DoctorsFragment, DoctorList, this@DoctorsFragment,this@DoctorsFragment)
+                    progressDialog.dismiss()
                 }
 
             }

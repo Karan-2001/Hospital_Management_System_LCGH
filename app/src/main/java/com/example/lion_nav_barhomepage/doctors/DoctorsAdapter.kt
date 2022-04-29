@@ -13,9 +13,11 @@ import android.widget.TextView
 
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
+import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
 import com.example.lion_nav_barhomepage.R
 
 class DoctorsAdapter(
@@ -26,6 +28,10 @@ class DoctorsAdapter(
          override fun onBindViewHolder(p0: ViewHolder, p1: Int) {
         p0?.doc_name?.text =  doc_list[p1].name
         p0?.doc_spec?.text = doc_list[p1].spec
+             p0.doc_img.load(doc_list[p1].img_url?.toUri()){
+                 placeholder(R.drawable.loading_animation)
+                 error(R.drawable.ic_broken_image)
+             }
         //p0?.doc_img?.setImageResource=""
          p0.card.setOnClickListener{
              int.go_to_main(p1)

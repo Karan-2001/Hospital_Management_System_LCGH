@@ -8,7 +8,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.net.toUri
 import androidx.fragment.app.activityViewModels
+import coil.load
 import com.example.lion_nav_barhomepage.Appointment.AppointmentFragment
 import com.example.lion_nav_barhomepage.R
 import com.example.lion_nav_barhomepage.databinding.DoctorsProfileBinding
@@ -41,10 +43,17 @@ class DoctorsProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val doc : data? = viewModel.get_data()
 
+        val img_url= doc?.img_url.toString()
+        binding.docimg
+            .load(img_url.toUri()){
+            placeholder(R.drawable.loading_animation)
+            error(R.drawable.ic_broken_image)
+        }
         docname = binding.name
         docname.text=doc?.name.toString()
         binding.docId.text= doc?.id.toString()
         binding.spec.text=doc?.spec.toString()
+
         binding.docExp.text=doc?.exp.toString()
         binding.docEdu.text=doc?.about.toString()
         if (doc != null) {
@@ -60,6 +69,7 @@ class DoctorsProfileFragment : Fragment() {
         binding.book.setOnClickListener {
             replaceFragment(AppointmentFragment())
         }
+
     }
  //override fun OnBackPressedCallback(){
     //  replaceFragment(DoctorsFragment())

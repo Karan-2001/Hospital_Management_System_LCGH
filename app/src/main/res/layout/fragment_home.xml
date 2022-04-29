@@ -92,35 +92,43 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_marginTop="20dp"
-                android:layout_marginLeft="30dp"
+                    app:layout_constraintEnd_toStartOf="@id/b2"
+                    app:layout_constraintBottom_toTopOf="@id/highlights"
+
                 android:text="Doctors"
+
 
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/what"/>
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id='@+id/b2'
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_marginLeft="25dp"
-                android:layout_marginTop="20dp"
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id='@+id/b2'
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
 
-                app:layout_constraintEnd_toStartOf="@id/b3"
-                app:layout_constraintHorizontal_bias="0.74"
-                app:layout_constraintStart_toEndOf="@id/b1"
-                app:layout_constraintTop_toBottomOf="@id/what" />
-            <androidx.appcompat.widget.AppCompatButton
-                android:id='@+id/b3'
-                app:layout_constraintStart_toEndOf="@id/b2"
-                app:layout_constraintTop_toBottomOf="@id/what"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginLeft="25dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="25dp"
-                android:layout_width="100dp"
-                android:layout_height="100dp"/>
+                    android:layout_marginTop="20dp"
+                    app:layout_constraintBottom_toTopOf="@id/highlights"
 
-            <TextView
+                    app:layout_constraintEnd_toStartOf="@id/b3"
+                    app:layout_constraintHorizontal_bias="0.74"
+                    app:layout_constraintStart_toEndOf="@id/b1"
+                    app:layout_constraintTop_toBottomOf="@id/what"
+                    app:layout_constraintVertical_bias="0.0" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id='@+id/b3'
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginTop="20dp"
+                    app:layout_constraintBottom_toTopOf="@id/highlights"
+
+                    app:layout_constraintEnd_toEndOf="parent"
+
+                    app:layout_constraintStart_toEndOf="@id/b2"
+                    app:layout_constraintTop_toBottomOf="@id/what"
+                    app:layout_constraintVertical_bias="0.0" />
+
+                <TextView
                 android:id='@+id/highlights'
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

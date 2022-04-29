@@ -2,13 +2,10 @@ package com.example.lion_nav_barhomepage.Home
 
 import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
-import android.view.CollapsibleActionView
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.activityViewModels
 import com.denzcoskun.imageslider.ImageSlider
@@ -17,15 +14,11 @@ import com.denzcoskun.imageslider.models.SlideModel
 import com.example.lion_nav_barhomepage.Appointment.AppointmentFragment
 import com.example.lion_nav_barhomepage.Facilities.FacilitiesFragment
 import com.example.lion_nav_barhomepage.R
-import com.example.lion_nav_barhomepage.databinding.FragmentDoctorsBinding
 import com.example.lion_nav_barhomepage.databinding.FragmentHomeBinding
 import com.example.lion_nav_barhomepage.doctors.DoctorsFragment
-import com.example.lion_nav_barhomepage.patientData
-import com.example.lion_nav_barhomepage.patientViewModel
-import com.example.lion_nav_barhomepage.patientdata
+import com.example.lion_nav_barhomepage.patient_main_data
+
 import com.google.android.material.appbar.CollapsingToolbarLayout
-import com.google.android.material.internal.CollapsingTextHelper
-import com.google.android.material.navigation.NavigationView
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -42,7 +35,6 @@ class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
     private lateinit var imageSlider: ImageSlider
-    val viewModel: patientViewModel by activityViewModels()
     private lateinit var animationDrawable: AnimationDrawable
 
 
@@ -77,7 +69,13 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         (activity as AppCompatActivity).supportActionBar?.title="Home"
-        binding.pName.setText(patientData.name.toString())
+        if( patient_main_data.name != null){
+            binding.pName.setText("Hello "+ patient_main_data.name.toString())
+        }
+        else{
+            binding.pName.setText("Hello!!")
+        }
+
         binding.b1.setOnClickListener {
             replaceFragment(DoctorsFragment())
         }

@@ -5,8 +5,10 @@
       <map>
         <entry key="app/src/main/res/drawable-v24/ic_about_us_svgrepo_com.xml" value="0.1835" />
         <entry key="app/src/main/res/drawable-v24/ic_baseline_home_24.xml" value="0.1835" />
+        <entry key="app/src/main/res/drawable-v24/ic_broken_image.xml" value="0.3095" />
         <entry key="app/src/main/res/drawable-v24/ic_contacts_book_svgrepo_com.xml" value="0.1835" />
         <entry key="app/src/main/res/drawable-v24/ic_menu_camera.xml" value="0.1835" />
+        <entry key="app/src/main/res/drawable-v24/loading_img.xml" value="0.3095" />
         <entry key="app/src/main/res/drawable/edittext.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/gradiant.xml" value="0.1535" />
         <entry key="app/src/main/res/drawable/gradientlist1.xml" value="0.1" />
@@ -22,28 +24,32 @@
         <entry key="app/src/main/res/drawable/splashgradient.xml" value="0.1" />
         <entry key="app/src/main/res/layout/about_us_dialog.xml" value="0.27304992675781253" />
         <entry key="app/src/main/res/layout/activity_intro.xml" value="0.10546794498308232" />
-        <entry key="app/src/main/res/layout/activity_login.xml" value="0.42651214599609377" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_login_tab.xml" value="0.2851646002565199" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_register_tab.xml" value="0.2851646002565199" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.3972061157226563" />
         <entry key="app/src/main/res/layout/activity_test2.xml" value="0.18640444634459172" />
         <entry key="app/src/main/res/layout/card.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/confirm_apt_dialog.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/confirm_apt_dialog.xml" value="0.2081939697265625" />
+        <entry key="app/src/main/res/layout/dialog_forgot_password.xml" value="0.29705553484904956" />
         <entry key="app/src/main/res/layout/doctor_card.xml" value="0.1" />
         <entry key="app/src/main/res/layout/doctors_profile.xml" value="0.15218353271484375" />
         <entry key="app/src/main/res/layout/fragment_about.xml" value="0.335" />
         <entry key="app/src/main/res/layout/fragment_appointment.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_contact.xml" value="0.34739583333333335" />
         <entry key="app/src/main/res/layout/fragment_covid.xml" value="0.33242753623188404" />
+        <entry key="app/src/main/res/layout/fragment_diagnosis.xml" value="0.24860231084606785" />
         <entry key="app/src/main/res/layout/fragment_doctors.xml" value="0.20174865722656252" />
         <entry key="app/src/main/res/layout/fragment_doctors_profile.xml" value="0.45" />
+        <entry key="app/src/main/res/layout/fragment_edit_profile.xml" value="0.26101531982421877" />
         <entry key="app/src/main/res/layout/fragment_facilities.xml" value="0.34739583333333335" />
         <entry key="app/src/main/res/layout/fragment_first.xml" value="0.2851646002565199" />
         <entry key="app/src/main/res/layout/fragment_gallery.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.23567047119140622" />
         <entry key="app/src/main/res/layout/fragment_login_tab.xml" value="0.34074390765284307" />
         <entry key="app/src/main/res/layout/fragment_medicines.xml" value="0.2851646002565199" />
+        <entry key="app/src/main/res/layout/fragment_patient_appointments.xml" value="0.2530349013657056" />
         <entry key="app/src/main/res/layout/fragment_patient_profile.xml" value="0.2590873024680397" />
         <entry key="app/src/main/res/layout/fragment_register.xml" value="0.2851646002565199" />
         <entry key="app/src/main/res/layout/fragment_register_tab.xml" value="0.32914428710937504" />
@@ -63,5 +69,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.1" />
+      </ProjectState>
+    </option>
   </component>
 </project>

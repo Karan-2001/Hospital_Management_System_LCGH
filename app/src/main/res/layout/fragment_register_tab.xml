@@ -8,6 +8,7 @@
     android:id="@+id/constraint">
 
     <EditText
+        android:layout_marginTop="30dp"
         android:id="@+id/sign_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -17,7 +18,7 @@
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
         android:textColorHint="#053D8E"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/sign_phone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -36,7 +37,7 @@
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
         android:textColorHint="#053D8E"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/sign_email"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/sign_name"
@@ -54,7 +55,7 @@
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
         android:textColorHint="#053D8E"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/sign_pass"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/sign_phone"
@@ -76,6 +77,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/sign_email"
+        app:layout_constraintBottom_toTopOf="@id/signup"
         app:layout_constraintWidth_percent=".8" />
 
     <androidx.appcompat.widget.AppCompatButton
@@ -84,6 +86,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/gradiant"
         android:text="Register"
+        android:layout_marginTop="30dp"
         android:textColor="#053D8E"
         android:textSize="16sp"
         android:textStyle="bold"

@@ -1,24 +1,31 @@
 package com.example.lion_nav_barhomepage
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
+import android.view.View
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.net.toUri
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.drawerlayout.widget.DrawerLayout.DrawerListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.ViewModel
+import coil.load
 import com.example.lion_nav_barhomepage.Appointment.AppointmentFragment
 import com.example.lion_nav_barhomepage.Contact.ContactFragment
 import com.example.lion_nav_barhomepage.Covid.CovidFragment
 import com.example.lion_nav_barhomepage.Facilities.FacilitiesFragment
 import com.example.lion_nav_barhomepage.Gallery.GalleryFragment
+import com.example.lion_nav_barhomepage.Gallery.data_img
 import com.example.lion_nav_barhomepage.Home.HomeFragment
 import com.example.lion_nav_barhomepage.about.AboutFragment
 import com.example.lion_nav_barhomepage.doctors.DoctorsFragment
@@ -30,32 +37,108 @@ import com.google.android.material.navigation.NavigationView
 class MainActivity : AppCompatActivity() {
     lateinit var toggle: ActionBarDrawerToggle
     lateinit var drawerLayout: DrawerLayout
+    lateinit var username  : TextView
+    lateinit var useremail : TextView
+    lateinit var userimg : ImageView
+    lateinit var sharedPreferences: SharedPreferences
+    private val viewModel: DoctorsViewModel by viewModels()
+    var img_url = patient_main_data.img_url
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-         val viewModel: patientViewModel by viewModels()
+
+
+        sharedPreferences=this.getSharedPreferences("login",
+            MODE_PRIVATE
+        )
 
         drawerLayout = findViewById(R.id.drawerLayout)
         val navView: NavigationView = findViewById(R.id.nav_view)
         val headerLayout = navView.getHeaderView(0)
 
         val nav_drawer_header = headerLayout.findViewById(R.id.profile) as LinearLayout
-        val username = headerLayout.findViewById(R.id.user_name) as TextView
-        val useremail = headerLayout.findViewById(R.id.user_email) as TextView
-//        viewModel.set_patientdata()
-        Log.e("In main ::","${patientData}")
-        username.setText(patientData.name.toString())
-        useremail.setText(patientData.email.toString())
-        nav_drawer_header.setOnClickListener{
-            replaceFragment(PatientProfileFragment(),"Patient Profile")
+         username = headerLayout.findViewById(R.id.user_name) as TextView
+        useremail = headerLayout.findViewById(R.id.user_email) as TextView
+        userimg = headerLayout.findViewById(R.id.userimg) as ImageView
+
+
+//----------------
+        val checklogin = sharedPreferences.getBoolean("logged", false)
+//----------------
+
+if (checklogin == false) {
+                username.setText("Guest User")
+                userimg.setImageResource(R.drawable.user_icon)
+                useremail.setText("")
+    nav_drawer_header.setOnClickListener {
+        val dialogBuilder = AlertDialog.Builder(this)
+        dialogBuilder.setMessage("Please Register")
+            .setCancelable(true)
+        dialogBuilder.setPositiveButton("Cancel ") { dialog, id ->
         }
+        dialogBuilder.setNegativeButton("Register") { dialog, id ->
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
+
+        }
+
+        val alert = dialogBuilder.create()
+        alert.show()
+    }
+
+            }
+else {
+
+
+    if (img_url == ""){
+        userimg.setImageResource(R.drawable.user_icon)
+    }
+    else {
+        userimg.load(img_url?.toUri()) {
+            placeholder(R.drawable.loading_animation)
+            error(R.drawable.ic_broken_image)
+        }
+    }
+
+    Log.e("In main viewmodel ::", "${patient_main_data}")
+    username.setText(patient_main_data.name.toString())
+    useremail.setText(patient_main_data.email.toString())
+    nav_drawer_header.setOnClickListener {
+        replaceFragment(PatientProfileFragment(), "Patient Profile")
+    }
+
+}
+
+
         toggle = ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close)
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         replaceFragment(HomeFragment(), "Home")
+        drawerLayout.addDrawerListener(object : DrawerListener {
+            override fun onDrawerSlide(drawerView: View, slideOffset: Float) {
+                //Log.i(TAG, "onDrawerSlide");
+            }
+
+            override fun onDrawerOpened(drawerView: View) {
+                Log.e("TAG", "onDrawerOpened")
+                if( img_url != patient_main_data.img_url){
+                    datachanged()
+                    Log.e("TAG", "changed")
+                }
+            }
+
+            override fun onDrawerClosed(drawerView: View) {
+                Log.e("TAG", "onDrawerClosed")
+            }
+
+            override fun onDrawerStateChanged(newState: Int) {
+                //Log.i(TAG, "onDrawerStateChanged");
+            }
+        })
 
         navView.setNavigationItemSelectedListener {
+            Log.e("open","drawer")
             setcheckbutton(it)
             when (it.itemId) {
                 R.id.nav_home -> replaceFragment(HomeFragment(), it.title.toString())
@@ -73,6 +156,26 @@ class MainActivity : AppCompatActivity() {
             true
         }
     }
+
+     fun datachanged(){
+
+         img_url = patient_main_data.img_url
+         if (img_url == ""){
+             userimg.setImageResource(R.drawable.user_icon)
+         }
+         else {
+             userimg.load(img_url?.toUri()) {
+                 placeholder(R.drawable.loading_animation)
+                 error(R.drawable.ic_broken_image)
+             }
+         }
+
+         Log.e("In main viewmodel ::", "${patient_main_data}")
+         username.setText(patient_main_data.name.toString())
+         useremail.setText(patient_main_data.email.toString())
+
+     }
+
 
     private fun logout() {
         sharedPreferences = getSharedPreferences("login", MODE_PRIVATE)
@@ -137,8 +240,12 @@ class MainActivity : AppCompatActivity() {
             replaceFragment(PatientProfileFragment(),"Patient Profile")
         }
         else if(id is DoctorsProfileFragment){
+            viewModel.setposition(-1)
             replaceFragment(DoctorsFragment(), "Doctors")
 
+        }
+        else if(id is HomeFragment){
+            replaceFragment(HomeFragment(),"Home")
         }
         else if (id !is HomeFragment){
             replaceFragment(HomeFragment(), "Home")

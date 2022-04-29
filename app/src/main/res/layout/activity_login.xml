@@ -38,8 +38,8 @@
 
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/viewpage"
-            android:layout_width="416dp"
-            android:layout_height="365dp"
+            android:layout_width="match_parent"
+            android:layout_height="370dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHeight_percent=".6"
@@ -72,6 +72,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="21dp"
+           android:layout_marginLeft="122dp"
             android:backgroundTint="@color/white"
             android:contentDescription="TODO"
             android:elevation="35dp"
@@ -90,15 +91,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="21dp"
-            android:layout_marginRight="120dp"
+            android:layout_marginRight="122dp"
             android:backgroundTint="@color/white"
+            app:layout_constraintStart_toEndOf="@id/google_logo"
             android:contentDescription="TODO"
             android:elevation="35dp"
             android:src="@drawable/icons8_facebook_circled_48"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.904"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/viewpage"
             app:layout_constraintVertical_bias="0.0">
 

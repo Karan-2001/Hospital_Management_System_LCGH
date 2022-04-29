@@ -10,6 +10,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.example.lion_nav_barhomepage.databinding.ActivityIntroBinding
+import com.example.lion_nav_barhomepage.patientdashboard.patientdata
 
 class IntroActivity : AppCompatActivity() {
 
@@ -25,6 +26,7 @@ class IntroActivity : AppCompatActivity() {
             startActivity(intent)
         }
         guest.setOnClickListener{
+            patient_main_data= patientdata()
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }

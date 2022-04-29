@@ -1,6 +1,7 @@
 package com.example.lion_nav_barhomepage.Appointment
 
 
+import android.app.ProgressDialog
 import android.content.DialogInterface
 import android.graphics.Color
 import android.os.Bundle
@@ -9,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CalendarView.OnDateChangeListener
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
@@ -21,6 +23,8 @@ import com.example.lion_nav_barhomepage.doctors.ConfirmDialogFragment
 import com.example.lion_nav_barhomepage.doctors.DoctorsFragment
 import com.example.lion_nav_barhomepage.doctors.DoctorsViewModel
 import com.example.lion_nav_barhomepage.doctors.data
+import com.example.lion_nav_barhomepage.patient_main_data
+import com.google.firebase.firestore.FirebaseFirestore
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -35,7 +39,7 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class AppointmentFragment : Fragment() {
-
+    private lateinit var db: FirebaseFirestore
     private var _binding: FragmentAppointmentBinding? = null
     private val binding get() = _binding!!
     private val viewModel: DoctorsViewModel by activityViewModels()
@@ -53,26 +57,37 @@ class AppointmentFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentAppointmentBinding.inflate(inflater, container, false)
         val view = binding.root
+        db = FirebaseFirestore.getInstance()
         return view
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val doc : data? = viewModel.get_data()
-        var dayOfWeek: Int=0
-        var selecteddate : String =""
+        //---------------------------
+        val appointmemt=db.collection("Appointment")
+        val getid=db.collection("count")
+        //---------------------------
+        val doc: data? = viewModel.get_data()
+        if (doc != null) {
+            doc.avl?.remove(0)
+            Log.e("avl ", "${doc.avl}")
+        }
+        Log.e("appointement", "$doc")
+        var dayOfWeek: Int = 0
+        var selecteddate: String = ""
         if (doc != null) {
             doc.avl?.let { viewModel.setavl(it) }
         }
-        val avl : String = viewModel.text
-        if( doc != null) {
+        val avl: String = viewModel.text
+        if (doc != null) {
             binding.showName.text = doc?.name.toString()
             binding.showAval.text = avl
         }
-        val cal :Calendar=Calendar.getInstance()
-        val simpleDateFormat  = SimpleDateFormat("dd-MM-yyyy")
-        val currdate=simpleDateFormat.format(cal.time)
-        val dd  = currdate.subSequence(0,2).toString().toInt()
-        val mm  = currdate.subSequence(3,5).toString().toInt()
-        val yyyy  = currdate.subSequence(6,10).toString().toInt()
+        val cal: Calendar = Calendar.getInstance()
+        val simpleDateFormat = SimpleDateFormat("dd-MM-yyyy")
+        val currdate = simpleDateFormat.format(cal.time)
+        val dd = currdate.subSequence(0, 2).toString().toInt()
+        val mm = currdate.subSequence(3, 5).toString().toInt()
+        val yyyy = currdate.subSequence(6, 10).toString().toInt()
+        val day = cal.get(Calendar.DAY_OF_WEEK)
 //        Log.e("on","${dd},$mm,$yyyy}")
 
 //        val cur_date : String = simpleDateFormat.format(calendar.getT)
@@ -81,38 +96,48 @@ class AppointmentFragment : Fragment() {
             val calendar: Calendar = Calendar.getInstance()
             calendar.set(year, month, date)
             dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK)
-            selecteddate="$date/${month+1}/$year"
-            if (doc != null) {
+            selecteddate = "$date/${month + 1}/$year"
+            if (doc != null && dayOfWeek != 0) {
                 settimeslot(dayOfWeek, doc)
                 check(date, month + 1, year, dd, mm, yyyy)
             }
         })
-        var slot : String =""
+        if(dayOfWeek==0){
+            dayOfWeek=day
+            settimeslot(dayOfWeek,doc)
+        }
+        Log.e("Day of week","$dayOfWeek")
+        var slot: String = ""
         binding.selectDoctor.setOnClickListener {
             replaceFragment(DoctorsFragment())
 
         }
+
         binding.time1.setOnClickListener {
-            slot="9:00 AM - 12:00 PM"
-            if(doc!=null){
+            slot = "9:00 AM - 12:00 PM"
+            if (doc != null) {
                 settimeslot(dayOfWeek, doc)
-                binding.time1.setBackgroundColor(Color.parseColor("#FF3C963F"))}
+                binding.time1.setBackgroundColor(Color.parseColor("#FF3C963F"))
+            }
 
         }
         binding.time2.setOnClickListener {
-            slot="6:00 PM - 9:00 PM"
-            if(doc!=null){
+            slot = "6:00 PM - 9:00 PM"
+            if (doc != null) {
                 settimeslot(dayOfWeek, doc)
-                binding.time2.setBackgroundColor(Color.parseColor("#FF3C963F"))}
+                binding.time2.setBackgroundColor(Color.parseColor("#FF3C963F"))
+            }
 
         }
         binding.time3.setOnClickListener {
-            slot="2:00 PM - 5:00 PM"
-            if(doc!=null){
+            slot = "2:00 PM - 5:00 PM"
+            if (doc != null) {
                 settimeslot(dayOfWeek, doc)
-                binding.time3.setBackgroundColor(Color.parseColor("#FF3C963F"))}
+                binding.time3.setBackgroundColor(Color.parseColor("#FF3C963F"))
+            }
 
         }
+
         binding.confirm.setOnClickListener {
             val check = binding.avlSlots.isVisible
             Log.e("Check:","$check")
@@ -136,9 +161,50 @@ class AppointmentFragment : Fragment() {
             }
 
             else {
+                val progressDialog = ProgressDialog(this.context)
+                progressDialog.setMessage("Loading....")
+                progressDialog.setCancelable(false)
+                progressDialog.show()
+
                 viewModel1.set_data(doc.name!!,selecteddate,slot)
                 var dialog = ConfirmDialogFragment()
                 dialog.show(childFragmentManager,"custom")
+                //---------------
+               var id =""
+                var intid =0
+                   getid.document("appointment").get()
+                   .addOnSuccessListener {
+                       data->
+                       id= data.get("id").toString()
+                       intid= data.get("id").toString().toInt()
+                       Log.e("id","$id , $intid")
+                       progressDialog.dismiss()
+                   }
+                       .addOnFailureListener{
+                           Log.e("id","not fetched")
+                       }
+
+                val aid =(doc.id.toString()+ patient_main_data.id.toString()+intid.toInt().toString())
+                Log.e("id","$id , $intid")
+                val data = appointment(
+                    intid.toString(),
+                    doc.id.toString(),
+                    patient_main_data.email,
+                    selecteddate,
+                    slot
+                )
+                appointmemt.document(aid).set(data)
+                    .addOnSuccessListener {
+                        val newid= intid + 1
+                        getid.document("appointment").update("id",newid)
+                        Toast.makeText(this.context,"Appointment placed", Toast.LENGTH_LONG).show()
+                    }
+                    .addOnFailureListener{
+                        Toast.makeText(this.context,"Appointment failed", Toast.LENGTH_LONG).show()
+
+                    }
+                Log.e("data","${data}")
+                //--------------
             }
             Log.e("on","${viewModel1.get_date()}")
 
@@ -183,10 +249,11 @@ class AppointmentFragment : Fragment() {
     }
 
     private fun settimeslot(dayOfWeek: Int, doc: data?) {
-        val week = doc?.avl
-
+        var week = doc?.avl
+        Log.e("Checkavl","$week")
         if (week!=null) {
-            val slots = doc.timeslots!![dayOfWeek - 1]
+            val slots = doc?.timeslots!![dayOfWeek-1]
+            Log.e("slots","$slots ,'---'$dayOfWeek")
             if (week.indexOf(dayOfWeek) != -1) {
                 binding.avlSlots.isVisible=false
                 if (slots[0] == 1){

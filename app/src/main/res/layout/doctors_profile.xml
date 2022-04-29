@@ -82,7 +82,7 @@
     </RelativeLayout>
 
     <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/picture"
+        android:id="@+id/docimg"
         android:layout_width="140dp"
         android:layout_height="140dp"
         android:layout_centerHorizontal="true"
