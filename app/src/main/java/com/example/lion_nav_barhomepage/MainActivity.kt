@@ -18,20 +18,19 @@ import androidx.core.net.toUri
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.drawerlayout.widget.DrawerLayout.DrawerListener
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import coil.load
 import com.example.lion_nav_barhomepage.Appointment.AppointmentFragment
 import com.example.lion_nav_barhomepage.Contact.ContactFragment
 import com.example.lion_nav_barhomepage.Covid.CovidFragment
 import com.example.lion_nav_barhomepage.Facilities.FacilitiesFragment
 import com.example.lion_nav_barhomepage.Gallery.GalleryFragment
-import com.example.lion_nav_barhomepage.Gallery.data_img
 import com.example.lion_nav_barhomepage.Home.HomeFragment
 import com.example.lion_nav_barhomepage.about.AboutFragment
 import com.example.lion_nav_barhomepage.doctors.DoctorsFragment
 import com.example.lion_nav_barhomepage.doctors.DoctorsProfileFragment
 import com.example.lion_nav_barhomepage.doctors.DoctorsViewModel
 import com.example.lion_nav_barhomepage.patientdashboard.*
+import com.example.lion_nav_barhomepage.patientdashboard.appointment.PatientAppointmentsFragment
 import com.google.android.material.navigation.NavigationView
 
 class MainActivity : AppCompatActivity() {

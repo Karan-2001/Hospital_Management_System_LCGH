@@ -9,7 +9,10 @@ import android.util.Log
 import android.view.WindowManager
 import androidx.activity.viewModels
 import com.example.lion_nav_barhomepage.patientdashboard.patientdata
+import com.google.firebase.firestore.FirebaseFirestore
+
 var patient_main_data = patientdata()
+var appointmentid =0
 @Suppress("DEPRECATION")
 
 class SplashActivity : AppCompatActivity() {
@@ -24,13 +27,20 @@ class SplashActivity : AppCompatActivity() {
             WindowManager.LayoutParams.FLAG_FULLSCREEN
         )
 
+
+        val getid=FirebaseFirestore.getInstance().collection("count")
+        getid.document("appointment").get()
+            .addOnSuccessListener {
+                    data->
+                appointmentid= data.get("id").toString().toInt()
+            }
+            .addOnFailureListener{
+                Log.e("id","not fetched")
+            }
         // we used the postDelayed(Runnable, time) method
         // to send a message with a delayed time.
         sharedPreferences = getSharedPreferences("login", MODE_PRIVATE)
-//        viewModel.set_patientdata()
-////        patientData= viewModel.getdata()
-//        Log.e("In splash ::","${patientData}")
-
+//
         val checklogin = sharedPreferences.getBoolean("logged", false)
         if (checklogin == true) {
             patient_main_data = patientdata(
