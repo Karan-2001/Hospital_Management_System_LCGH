@@ -1,7 +1,6 @@
 package com.example.lion_nav_barhomepage.doctors
 
 import android.app.ProgressDialog
-import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -10,20 +9,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
-import android.widget.ImageView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.cardview.widget.CardView
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.Navigation
-import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.NavigationUI.setupActionBarWithNavController
-import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lion_nav_barhomepage.R
 import com.example.lion_nav_barhomepage.databinding.FragmentDoctorsBinding
 import com.google.firebase.database.*
+import java.lang.Character.toLowerCase
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -137,6 +129,11 @@ class DoctorsFragment : Fragment() ,DoctorsAdapter.Click ,DoctorsAdapter.replace
                     .contains(text.toLowerCase()) || eachCourse.spec!!.toLowerCase()
                     .contains(text.toLowerCase())
             ) {
+                filtered.add(eachCourse)
+            }
+            else if( eachCourse.spec!!.toLowerCase()
+                    .contains(text.toLowerCase()) || eachCourse.spec!!.toLowerCase()
+                    .contains(text.toLowerCase())){
                 filtered.add(eachCourse)
             }
         }

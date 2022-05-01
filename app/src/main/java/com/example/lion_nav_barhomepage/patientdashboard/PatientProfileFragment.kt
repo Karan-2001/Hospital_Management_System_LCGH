@@ -12,10 +12,9 @@ import androidx.core.net.toUri
 import coil.load
 import com.example.lion_nav_barhomepage.IntroActivity
 import com.example.lion_nav_barhomepage.R
-import com.example.lion_nav_barhomepage.databinding.DoctorsProfileBinding
 import com.example.lion_nav_barhomepage.databinding.FragmentPatientProfileBinding
-import com.example.lion_nav_barhomepage.doctors.DoctorsAdapter
 import com.example.lion_nav_barhomepage.patient_main_data
+import com.example.lion_nav_barhomepage.patientdashboard.appointment.PatientAppointmentsFragment
 import com.example.lion_nav_barhomepage.sharedPreferences
 
 // TODO: Rename parameter arguments, choose names that match

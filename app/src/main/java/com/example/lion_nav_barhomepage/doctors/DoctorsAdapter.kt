@@ -19,9 +19,10 @@ import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.lion_nav_barhomepage.R
+import com.example.lion_nav_barhomepage.patientdashboard.appointment.PatientAppointmentsFragment
 
 class DoctorsAdapter(
-    val context: DoctorsFragment, var doc_list: ArrayList<data>, private val int: Click,private val rep: replace
+    val context: DoctorsFragment, var doc_list: ArrayList<data>, private val int: Click, private val rep: replace
 ) : RecyclerView.Adapter<DoctorsAdapter.ViewHolder>() {
      //var doc_list:List<data> = doctors().doc_list()
 

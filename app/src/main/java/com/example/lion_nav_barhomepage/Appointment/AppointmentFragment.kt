@@ -18,6 +18,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.lion_nav_barhomepage.R
 import com.example.lion_nav_barhomepage.about.CustomDialogFragment
+import com.example.lion_nav_barhomepage.appointmentid
 import com.example.lion_nav_barhomepage.databinding.FragmentAppointmentBinding
 import com.example.lion_nav_barhomepage.doctors.ConfirmDialogFragment
 import com.example.lion_nav_barhomepage.doctors.DoctorsFragment
@@ -161,41 +162,27 @@ class AppointmentFragment : Fragment() {
             }
 
             else {
-                val progressDialog = ProgressDialog(this.context)
-                progressDialog.setMessage("Loading....")
-                progressDialog.setCancelable(false)
-                progressDialog.show()
+
 
                 viewModel1.set_data(doc.name!!,selecteddate,slot)
                 var dialog = ConfirmDialogFragment()
                 dialog.show(childFragmentManager,"custom")
                 //---------------
-               var id =""
-                var intid =0
-                   getid.document("appointment").get()
-                   .addOnSuccessListener {
-                       data->
-                       id= data.get("id").toString()
-                       intid= data.get("id").toString().toInt()
-                       Log.e("id","$id , $intid")
-                       progressDialog.dismiss()
-                   }
-                       .addOnFailureListener{
-                           Log.e("id","not fetched")
-                       }
 
-                val aid =(doc.id.toString()+ patient_main_data.id.toString()+intid.toInt().toString())
-                Log.e("id","$id , $intid")
+                val aid =(doc.id.toString()+ patient_main_data.id.toString()+ appointmentid)
+                Log.e("id"," $aid")
                 val data = appointment(
-                    intid.toString(),
-                    doc.id.toString(),
+                    aid,
+                    doc.name.toString(),
+                    doc.spec.toString(),
                     patient_main_data.email,
                     selecteddate,
-                    slot
+                    slot,
+                    "Pending"
                 )
                 appointmemt.document(aid).set(data)
                     .addOnSuccessListener {
-                        val newid= intid + 1
+                        val newid= appointmentid+ 1
                         getid.document("appointment").update("id",newid)
                         Toast.makeText(this.context,"Appointment placed", Toast.LENGTH_LONG).show()
                     }
