@@ -45,7 +45,7 @@
         app:layout_constraintTop_toBottomOf="@+id/email"
         app:layout_constraintWidth_percent=".8" />
 
-    <androidx.appcompat.widget.AppCompatButton
+    <Button
         android:id="@+id/signup"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -59,7 +59,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/forgot"
         app:layout_constraintVertical_bias=".7"
-        app:layout_constraintWidth_percent=".8" />
+        app:layout_constraintWidth_percent=".8"
+        android:padding="10dp" />
 
     <TextView
         android:id="@+id/forgot"
@@ -67,6 +68,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="23dp"
         android:layout_marginRight="5dp"
+        android:layout_marginBottom="10dp"
         android:text="Forgot password"
         android:textColor="#053D8E"
         android:textSize="16sp"

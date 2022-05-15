@@ -2,12 +2,14 @@ package com.example.lion_nav_barhomepage.Home
 
 import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.Fragment
+import com.android.volley.Request
+import com.android.volley.toolbox.JsonObjectRequest
+import com.android.volley.toolbox.Volley
 import com.denzcoskun.imageslider.ImageSlider
 import com.denzcoskun.imageslider.constants.ScaleTypes
 import com.denzcoskun.imageslider.models.SlideModel
@@ -17,8 +19,9 @@ import com.example.lion_nav_barhomepage.R
 import com.example.lion_nav_barhomepage.databinding.FragmentHomeBinding
 import com.example.lion_nav_barhomepage.doctors.DoctorsFragment
 import com.example.lion_nav_barhomepage.patient_main_data
-
 import com.google.android.material.appbar.CollapsingToolbarLayout
+import org.json.JSONException
+import org.json.JSONObject
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -85,6 +88,7 @@ class HomeFragment : Fragment() {
         binding.b3.setOnClickListener {
             replaceFragment(FacilitiesFragment())
         }
+//        getInfo()
 
         val collapsingToolbarLayout: CollapsingToolbarLayout = binding.collapsingToolbar
         val animationDrawable = collapsingToolbarLayout.background as AnimationDrawable
@@ -102,7 +106,32 @@ class HomeFragment : Fragment() {
         fragmentTransaction.replace(R.id.framelayout,fragment)
         fragmentTransaction.commit()
     }
+//    private fun getInfo(){
+//     val url= "https://api.rootnet.in/covid19-in/stats/latest"
+//        val obj = JSONObject(url)
+//        val queue = Volley.newRequestQueue(context)
+//        val request = JsonObjectRequest(Request.Method.GET.toString(),obj,null) { response ->
+//            try {
+//
+//                val dataObj: JSONObject = obj.getJSONObject("data")
+//                val summaryObj: JSONObject = obj.getJSONObject("summary")
+//                val cases:Int = summaryObj.getInt("total")
+//                val recovered:Int = summaryObj.getInt("discharged")
+//                val deaths:Int = summaryObj.getInt("deaths")
+//                binding.acases.text=cases.toString()
+//                binding.rcases.text=recovered.toString()
+//                binding.dcases.text=deaths.toString()
+//
+//            } catch (e: JSONException) {
+//                e.printStackTrace()
+//            }
+//        }
+//        queue.add(request)
+//
+//    }
+
 
 
 
     }
+

@@ -23,9 +23,6 @@ import com.google.firebase.firestore.FirebaseFirestore
 import kotlin.reflect.typeOf
  lateinit  var appointmentlist : ArrayList<appointment>
 class PatientAppointmentsFragment : Fragment() {
-
-    private lateinit var dbref : DatabaseReference
-
     private lateinit var recyclerView: RecyclerView
     private lateinit var db: FirebaseFirestore
     private var _binding: FragmentPatientAppointmentsBinding? = null
@@ -53,8 +50,6 @@ class PatientAppointmentsFragment : Fragment() {
         progressDialog.setCancelable(false)
         progressDialog.show()
         appointmentlist = arrayListOf<appointment>()
-            var doctor = data()
-
 
            db.collection("Appointment").whereEqualTo("patient_emial", patient_main_data.email.toString())
                .get()

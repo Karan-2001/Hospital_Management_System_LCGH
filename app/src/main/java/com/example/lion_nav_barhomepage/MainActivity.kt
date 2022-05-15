@@ -31,8 +31,15 @@ import com.example.lion_nav_barhomepage.doctors.DoctorsProfileFragment
 import com.example.lion_nav_barhomepage.doctors.DoctorsViewModel
 import com.example.lion_nav_barhomepage.patientdashboard.*
 import com.example.lion_nav_barhomepage.patientdashboard.appointment.PatientAppointmentsFragment
+import com.example.lion_nav_barhomepage.patientdashboard.diagnosis.DiagnosisFragment
+import com.example.lion_nav_barhomepage.patientdashboard.diagnosis.PresFragment
+import com.example.lion_nav_barhomepage.patientdashboard.reports.AddReportsFragment
+import com.example.lion_nav_barhomepage.patientdashboard.reports.ReportsFragment
+import com.example.lion_nav_barhomepage.patientdashboard.reports.pdfactivity
+import com.example.lion_nav_barhomepage.patientdashboard.vaccines.AddVaccineFragment
+import com.example.lion_nav_barhomepage.patientdashboard.vaccines.VaccinesFragment
 import com.google.android.material.navigation.NavigationView
-
+var flag=0
 class MainActivity : AppCompatActivity() {
     lateinit var toggle: ActionBarDrawerToggle
     lateinit var drawerLayout: DrawerLayout
@@ -177,6 +184,7 @@ else {
 
 
     private fun logout() {
+
         sharedPreferences = getSharedPreferences("login", MODE_PRIVATE)
         sharedPreferences.edit().putBoolean("logged",false).apply()
         Toast.makeText(
@@ -230,10 +238,10 @@ else {
     override fun onBackPressed() {
         val id = supportFragmentManager.findFragmentById(R.id.framelayout )
         if( id  is PatientAppointmentsFragment ||
-            id  is  VaccinesFragment||
+            id  is VaccinesFragment ||
             id  is ReportsFragment ||
             id  is HistoryFragment ||
-            id  is  DiagnosisFragment||
+            id  is DiagnosisFragment ||
             id  is MedicinesFragment ||
             id is EditProfileFragment    ){
             replaceFragment(PatientProfileFragment(),"Patient Profile")
@@ -243,6 +251,27 @@ else {
             replaceFragment(DoctorsFragment(), "Doctors")
 
         }
+        else if(id is PresFragment){
+
+            replaceFragment(DiagnosisFragment(), "Diagnosis")
+
+        } else if(id is pdfactivity){
+            Log.e("back","${pdfactivity().getflag()}")
+                    if(pdfactivity().getflag() ==1) {
+                        replaceFragment(ReportsFragment(), "Reports")
+                    }
+            else if(pdfactivity().getflag() ==2){
+                        replaceFragment(VaccinesFragment(), "Vaccines")
+                    }
+
+        }
+
+        else if(id is AddVaccineFragment){
+            replaceFragment(VaccinesFragment(),"Vaccines")
+        } else if(id is AddReportsFragment){
+            replaceFragment(ReportsFragment(),"Reports")
+        }
+
         else if(id is HomeFragment){
             replaceFragment(HomeFragment(),"Home")
         }
@@ -260,6 +289,7 @@ else {
 //                supportFragmentManager.popBackStack()
 //            }
     }
+
 }
 
 

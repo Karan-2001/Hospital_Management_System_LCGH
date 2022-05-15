@@ -15,6 +15,9 @@ import com.example.lion_nav_barhomepage.R
 import com.example.lion_nav_barhomepage.databinding.FragmentPatientProfileBinding
 import com.example.lion_nav_barhomepage.patient_main_data
 import com.example.lion_nav_barhomepage.patientdashboard.appointment.PatientAppointmentsFragment
+import com.example.lion_nav_barhomepage.patientdashboard.diagnosis.DiagnosisFragment
+import com.example.lion_nav_barhomepage.patientdashboard.reports.ReportsFragment
+import com.example.lion_nav_barhomepage.patientdashboard.vaccines.VaccinesFragment
 import com.example.lion_nav_barhomepage.sharedPreferences
 
 // TODO: Rename parameter arguments, choose names that match
