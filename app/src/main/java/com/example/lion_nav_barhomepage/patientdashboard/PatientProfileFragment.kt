@@ -59,15 +59,11 @@ class PatientProfileFragment : Fragment() {
         binding.results.setOnClickListener{
             replaceFragment(ReportsFragment())
         }
-        binding.history.setOnClickListener{
-            replaceFragment(HistoryFragment())
-        }
+
         binding.diagnosis.setOnClickListener{
             replaceFragment(DiagnosisFragment())
         }
-        binding.medicine.setOnClickListener{
-            replaceFragment(MedicinesFragment())
-        }
+
         binding.editButton.setOnClickListener {
             replaceFragment(EditProfileFragment())
         }

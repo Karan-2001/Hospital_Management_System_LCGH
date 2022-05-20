@@ -1,12 +1,19 @@
 package com.example.lion_nav_barhomepage.Home
 
+import `in`.codeshuffle.typewriterview.TypeWriterListener
 import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.widget.CompositePageTransformer
+import androidx.viewpager2.widget.MarginPageTransformer
+import androidx.viewpager2.widget.ViewPager2
 import com.android.volley.Request
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
@@ -22,6 +29,7 @@ import com.example.lion_nav_barhomepage.patient_main_data
 import com.google.android.material.appbar.CollapsingToolbarLayout
 import org.json.JSONException
 import org.json.JSONObject
+import kotlin.math.abs
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -39,6 +47,11 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var imageSlider: ImageSlider
     private lateinit var animationDrawable: AnimationDrawable
+    private lateinit var  viewPager2: ViewPager2
+    private lateinit var handler : Handler
+    private lateinit var imageList:ArrayList<Int>
+    private lateinit var adapter: ImageAdapter
+
 
 
 
@@ -49,34 +62,50 @@ class HomeFragment : Fragment() {
         //    param1 = it.getString(ARG_PARAM1)
         //   param2 = it.getString(ARG_PARAM2)
         // }
-        }
 
-        override fun onCreateView(
+    }
+
+
+
+
+    override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
         ): View? {
             // Inflate the layout for this fragment
             _binding = FragmentHomeBinding.inflate(inflater, container, false)
-            imageSlider=binding.imageSlider
-            val imagelist = ArrayList<SlideModel>()
-
-
-            imagelist.add(SlideModel(R.drawable.one))
-            imagelist.add(SlideModel(R.drawable.img1))
-            imagelist.add(SlideModel(R.drawable.img5))
-            imageSlider.setImageList(imagelist,ScaleTypes.FIT)
+//            imageSlider=binding.imageSlider
+//            val imagelist = ArrayList<SlideModel>()
+//
+//
+//            imagelist.add(SlideModel(R.drawable.one))
+//            imagelist.add(SlideModel(R.drawable.img1))
+//            imagelist.add(SlideModel(R.drawable.img5))
+//            imageSlider.setImageList(imagelist,ScaleTypes.FIT)
             val view = binding.root
             return view
         }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        init()
+        setUpTransformer()
 
+        viewPager2.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+                handler.removeCallbacks(runnable)
+                handler.postDelayed(runnable, 2000)
+            }
+        })
         (activity as AppCompatActivity).supportActionBar?.title="Home"
         if( patient_main_data.name != null){
-            binding.pName.setText("Hello "+ patient_main_data.name.toString())
+            binding.pName.setDelay(300)
+            binding.pName.animateText("Hello "+ patient_main_data.name.toString()+"!")
+
         }
         else{
-            binding.pName.setText("Hello!!")
+            binding.pName.setDelay(300)
+            binding.pName.animateText("Hello!!")
         }
 
         binding.b1.setOnClickListener {
@@ -99,11 +128,62 @@ class HomeFragment : Fragment() {
 
 
     }
+    override fun onPause() {
+        super.onPause()
 
-    private fun replaceFragment(fragment: Fragment){
+        handler.removeCallbacks(runnable)
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        handler.postDelayed(runnable , 4000)
+    }
+
+    private val runnable = Runnable {
+        viewPager2.currentItem = viewPager2.currentItem + 1
+    }
+
+    private fun setUpTransformer(){
+        val transformer = CompositePageTransformer()
+        transformer.addTransformer(MarginPageTransformer(40))
+        transformer.addTransformer { page, position ->
+            val r = 1 - abs(position)
+            page.scaleY = 0.65f + r * 0.16f
+        }
+
+        viewPager2.setPageTransformer(transformer)
+    }
+
+    private fun init(){
+        viewPager2 = binding.imageSlider
+        handler = Handler(Looper.myLooper()!!)
+        imageList = ArrayList()
+
+        imageList.add(R.drawable.one)
+        imageList.add(R.drawable.img1)
+        imageList.add(R.drawable.img2)
+        imageList.add(R.drawable.imge)
+        imageList.add(R.drawable.img4)
+        imageList.add(R.drawable.img5)
+//        imageList.add(R.drawable.img6)
+//        imageList.add(R.drawable.eight)
+
+
+        adapter = ImageAdapter(imageList, viewPager2)
+
+        viewPager2.adapter = adapter
+        viewPager2.offscreenPageLimit = 3
+        viewPager2.clipToPadding = false
+        viewPager2.clipChildren = false
+        viewPager2.getChildAt(0).overScrollMode = RecyclerView.OVER_SCROLL_NEVER
+
+    }
+
+    private fun replaceFragment(fragment: Fragment) {
         val fragmentManager = parentFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.framelayout,fragment)
+        fragmentTransaction.replace(R.id.framelayout, fragment)
         fragmentTransaction.commit()
     }
 //    private fun getInfo(){

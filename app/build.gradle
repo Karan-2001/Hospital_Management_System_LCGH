@@ -64,5 +64,7 @@ dependencies {
     implementation "androidx.cardview:cardview:1.0.0"
     implementation 'com.github.denzcoskun:ImageSlideshow:0.1.0'
     implementation 'com.android.support:design:32.0.0'
+    implementation 'in.codeshuffle:typewriterview:1.1.0'
+
 
 }
