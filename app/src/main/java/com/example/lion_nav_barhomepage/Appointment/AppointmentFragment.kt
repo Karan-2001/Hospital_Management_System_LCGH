@@ -4,6 +4,7 @@ package com.example.lion_nav_barhomepage.Appointment
 import android.app.ProgressDialog
 import android.content.DialogInterface
 import android.graphics.Color
+import android.graphics.PorterDuff
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -118,7 +119,8 @@ class AppointmentFragment : Fragment() {
             slot = "9:00 AM - 12:00 PM"
             if (doc != null) {
                 settimeslot(dayOfWeek, doc)
-                binding.time1.setBackgroundColor(Color.parseColor("#FF3C963F"))
+
+                binding.time1.setBackgroundResource(R.drawable.selectbackground)
             }
 
         }
@@ -126,7 +128,8 @@ class AppointmentFragment : Fragment() {
             slot = "6:00 PM - 9:00 PM"
             if (doc != null) {
                 settimeslot(dayOfWeek, doc)
-                binding.time2.setBackgroundColor(Color.parseColor("#FF3C963F"))
+//                binding.time2.setBackgroundColor(Color.parseColor("#FF3C963F"))
+                binding.time2.setBackgroundResource(R.drawable.selectbackground)
             }
 
         }
@@ -134,7 +137,8 @@ class AppointmentFragment : Fragment() {
             slot = "2:00 PM - 5:00 PM"
             if (doc != null) {
                 settimeslot(dayOfWeek, doc)
-                binding.time3.setBackgroundColor(Color.parseColor("#FF3C963F"))
+//                binding.time3.setBackgroundColor(Color.parseColor("#FF3C963F"))
+                binding.time3.setBackgroundResource(R.drawable.selectbackground)
             }
 
         }
@@ -218,13 +222,15 @@ class AppointmentFragment : Fragment() {
         else{
             binding.avlSlots.setText("Invalid Date")
             binding.avlSlots.isVisible=true
-
             binding.time1.isClickable=false
-            binding.time1.setBackgroundColor(Color.parseColor("#FFE98383"))
-            binding.time2.isClickable=false
-            binding.time2.setBackgroundColor(Color.parseColor("#FFE98383"))
-            binding.time3.isClickable=false
-            binding.time3.setBackgroundColor(Color.parseColor("#FFE98383"))
+            binding.time1.isEnabled=false
+            binding.time1.setBackgroundResource(R.drawable.avail)
+            binding.time1.isClickable=false
+            binding.time2.isEnabled=false
+            binding.time2.setBackgroundResource(R.drawable.avail)
+            binding.time1.isClickable=false
+            binding.time3.isEnabled=false
+            binding.time3.setBackgroundResource(R.drawable.avail)
             Log.e("on","3)False")
 
         }
@@ -245,28 +251,35 @@ class AppointmentFragment : Fragment() {
                 binding.avlSlots.isVisible=false
                 if (slots[0] == 1){
                     binding.time1.isClickable=true
-                    binding.time1.setBackgroundColor(Color.parseColor("#FFE44545"))
+                    binding.time1.isEnabled=true
+                    binding.time1.setBackgroundResource(R.drawable.avail)
+
                 }
                 else{
                     binding.time1.isClickable=false
-                    binding.time1.setBackgroundColor(Color.parseColor("#FFE98383"))
+                    binding.time1.isEnabled=false
+                    binding.time1.setBackgroundResource(R.drawable.avail)
                 }
                 if (slots[1] == 1){
                     binding.time3.isClickable=true
-                    binding.time3.setBackgroundColor(Color.parseColor("#FFE44545"))
+                    binding.time3.isEnabled=true
+                    binding.time3.setBackgroundResource(R.drawable.avail)
                 }
                 else{
                     binding.time3.isClickable=false
-                    binding.time3.setBackgroundColor(Color.parseColor("#FFE98383"))
+                    binding.time3.isEnabled=false
+                    binding.time3.setBackgroundResource(R.drawable.avail)
 
                 }
                 if (slots[2] == 1){
                     binding.time2.isClickable=true
-                    binding.time2.setBackgroundColor(Color.parseColor("#FFE44545"))
+                    binding.time2.isEnabled=true
+                    binding.time2.setBackgroundResource(R.drawable.avail)
                 }
                 else{
                     binding.time2.isClickable=false
-                    binding.time2.setBackgroundColor(Color.parseColor("#FFE98383"))
+                    binding.time2.isEnabled=false
+                    binding.time2.setBackgroundResource(R.drawable.avail)
                 }
             }
 //            FFE44545
@@ -277,17 +290,26 @@ class AppointmentFragment : Fragment() {
                 binding.time1.isClickable=false
                 binding.time2.isClickable=false
                 binding.time3.isClickable=false
-                binding.time2.setBackgroundColor(Color.parseColor("#FFE98383"))
-                binding.time1.setBackgroundColor(Color.parseColor("#FFE98383"))
-                binding.time3.setBackgroundColor(Color.parseColor("#FFE98383"))
+                binding.time1.isEnabled=false
+                binding.time2.isEnabled=false
+                binding.time3.isEnabled=false
+                binding.time2.setBackgroundResource(R.drawable.avail)
+                binding.time1.setBackgroundResource(R.drawable.avail)
+                binding.time3.setBackgroundResource(R.drawable.avail)
 
                 Log.e("on","false")
             }
         }
         else{
-            binding.time2.setBackgroundColor(Color.parseColor("#FFE98383"))
-            binding.time1.setBackgroundColor(Color.parseColor("#FFE98383"))
-            binding.time3.setBackgroundColor(Color.parseColor("#FFE98383"))
+            binding.time1.isClickable=false
+            binding.time2.isClickable=false
+            binding.time3.isClickable=false
+            binding.time1.isEnabled=false
+            binding.time2.isEnabled=false
+            binding.time3.isEnabled=false
+            binding.time2.setBackgroundResource(R.drawable.avail)
+            binding.time1.setBackgroundResource(R.drawable.avail)
+            binding.time3.setBackgroundResource(R.drawable.avail)
             Log.e("on","false")
         }
 

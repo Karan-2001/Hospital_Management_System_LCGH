@@ -9,7 +9,7 @@
     android:layout_marginRight="10dp"
     android:layout_marginTop="20dp"
     app:cardBackgroundColor="@color/white"
-    app:cardCornerRadius="8dp"
+    app:cardCornerRadius="20dp"
     app:cardElevation="8dp"
     app:cardMaxElevation="10dp"
     app:cardPreventCornerOverlap="true">
@@ -34,14 +34,22 @@
         android:layout_height="wrap_content">
 
         <!--ImageVIew to display our Course Image-->
-        <ImageView
+
+
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/doctorimg"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_margin="10dp"
+            android:layout_width="85dp"
+            android:layout_height="85dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:adjustViewBounds="true"
             android:contentDescription="@string/app_name"
             android:padding="5dp"
-            android:src="@drawable/ic_launcher_background" />
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_launcher_background"
+            app:shapeAppearanceOverlay="@style/Circular" />
 
         <!--Text View to display Course Name-->
         <TextView
@@ -49,7 +57,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="25dp"
             android:layout_toEndOf="@id/doctorimg"
             android:text="doctor_name"
             android:textColor="@color/black"
@@ -64,7 +72,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/doctorname"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:layout_toEndOf="@id/doctorimg"
             android:drawablePadding="2dp"
             android:text="@string/Specialization" />
