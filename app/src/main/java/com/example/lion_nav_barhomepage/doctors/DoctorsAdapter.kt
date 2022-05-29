@@ -6,10 +6,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Adapter
-import android.widget.ImageView
-import android.widget.RelativeLayout
-import android.widget.TextView
+import android.view.animation.AnimationUtils
+import android.widget.*
 
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
@@ -19,6 +17,7 @@ import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.lion_nav_barhomepage.R
+import com.example.lion_nav_barhomepage.context_activity
 import com.example.lion_nav_barhomepage.patientdashboard.appointment.PatientAppointmentsFragment
 
 class DoctorsAdapter(

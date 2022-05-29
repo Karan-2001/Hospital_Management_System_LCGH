@@ -15,14 +15,7 @@
         <activity
             android:name=".patientdashboard.reports.pdfviewer"
             android:exported="false" />
-        <activity
-            android:name=".RegisterTabActivity"
-            android:exported="false" />
-        <activity
-            android:name=".LoginTabActivity"
-            android:exported="false"
-            android:label="@string/title_activity_login_tab"
-            android:theme="@style/Theme.Lionnavbarhomepage.NoActionBar" />
+
         <activity
             android:name=".LoginActivity"
             android:exported="false"

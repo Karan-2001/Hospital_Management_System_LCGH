@@ -46,6 +46,7 @@ class DoctorsFragment : Fragment() ,DoctorsAdapter.Click ,DoctorsAdapter.replace
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+
 //      arguments?.let {
 //          param1 = it.getString(ARG_PARAM1)
 //

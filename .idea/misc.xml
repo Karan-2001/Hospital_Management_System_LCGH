@@ -11,7 +11,10 @@
         <entry key="app/src/main/res/drawable-v24/ic_contacts_book_svgrepo_com.xml" value="0.1835" />
         <entry key="app/src/main/res/drawable-v24/ic_menu_camera.xml" value="0.1835" />
         <entry key="app/src/main/res/drawable-v24/loading_img.xml" value="0.3095" />
+        <entry key="app/src/main/res/drawable/appbuttonbackground.xml" value="0.1305" />
         <entry key="app/src/main/res/drawable/appointmentbutton.xml" value="0.23647613525390626" />
+        <entry key="app/src/main/res/drawable/confirmappointmentbutton.xml" value="0.1305" />
+        <entry key="app/src/main/res/drawable/details_button.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/doc_backgrounf.xml" value="0.1295" />
         <entry key="app/src/main/res/drawable/edittext.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/gradiant.xml" value="0.1535" />
@@ -28,6 +31,7 @@
         <entry key="app/src/main/res/drawable/patient_gradient.xml" value="0.181" />
         <entry key="app/src/main/res/drawable/search.xml" value="0.1295" />
         <entry key="app/src/main/res/drawable/selectbackground.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/selectdocbutton.xml" value="0.1305" />
         <entry key="app/src/main/res/drawable/splashgradient.xml" value="0.1" />
         <entry key="app/src/main/res/layout-v23/fragment_doctors.xml" value="0.2902877807617188" />
         <entry key="app/src/main/res/layout/about_us_dialog.xml" value="0.27304992675781253" />
@@ -45,16 +49,17 @@
         <entry key="app/src/main/res/layout/confirm_apt_dialog.xml" value="0.2081939697265625" />
         <entry key="app/src/main/res/layout/diagnosis_list.xml" value="0.2530349013657056" />
         <entry key="app/src/main/res/layout/dialog_forgot_password.xml" value="0.29705553484904956" />
-        <entry key="app/src/main/res/layout/doctor_card.xml" value="0.2576919555664063" />
+        <entry key="app/src/main/res/layout/doctor.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/doctor_card.xml" value="0.22029571533203127" />
         <entry key="app/src/main/res/layout/doctors_profile.xml" value="0.15218353271484375" />
         <entry key="app/src/main/res/layout/fragment_about.xml" value="0.335" />
         <entry key="app/src/main/res/layout/fragment_add_reports.xml" value="0.23596358118361152" />
         <entry key="app/src/main/res/layout/fragment_add_vaccine.xml" value="0.335" />
-        <entry key="app/src/main/res/layout/fragment_appointment.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_appointment.xml" value="0.22256164550781252" />
         <entry key="app/src/main/res/layout/fragment_contact.xml" value="0.34739583333333335" />
         <entry key="app/src/main/res/layout/fragment_covid.xml" value="0.33242753623188404" />
         <entry key="app/src/main/res/layout/fragment_diagnosis.xml" value="0.24860231084606785" />
-        <entry key="app/src/main/res/layout/fragment_doctors.xml" value="0.366204833984375" />
+        <entry key="app/src/main/res/layout/fragment_doctors.xml" value="0.25027313232421877" />
         <entry key="app/src/main/res/layout/fragment_doctors_profile.xml" value="0.45" />
         <entry key="app/src/main/res/layout/fragment_edit_profile.xml" value="0.26101531982421877" />
         <entry key="app/src/main/res/layout/fragment_facilities.xml" value="0.34739583333333335" />
@@ -67,7 +72,7 @@
         <entry key="app/src/main/res/layout/fragment_patient_profile.xml" value="0.15409698486328127" />
         <entry key="app/src/main/res/layout/fragment_pdfactivity.xml" value="0.165" />
         <entry key="app/src/main/res/layout/fragment_register.xml" value="0.2851646002565199" />
-        <entry key="app/src/main/res/layout/fragment_register_tab.xml" value="0.32914428710937504" />
+        <entry key="app/src/main/res/layout/fragment_register_tab.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_reports.xml" value="0.26849080803762293" />
         <entry key="app/src/main/res/layout/fragment_vaccines.xml" value="0.2530349013657056" />
         <entry key="app/src/main/res/layout/image_container.xml" value="0.1" />
@@ -78,7 +83,7 @@
         <entry key="app/src/main/res/layout/item_specialisation.xml" value="0.1" />
         <entry key="app/src/main/res/layout/nav_header.xml" value="0.335" />
         <entry key="app/src/main/res/layout/reports_list.xml" value="0.23596358118361152" />
-        <entry key="app/src/main/res/layout/test.xml" value="0.25455322265625" />
+        <entry key="app/src/main/res/layout/test.xml" value="0.1794921875" />
         <entry key="app/src/main/res/layout/vaccine_list.xml" value="0.2530349013657056" />
         <entry key="app/src/main/res/menu/menu.xml" value="0.27314814814814814" />
       </map>
