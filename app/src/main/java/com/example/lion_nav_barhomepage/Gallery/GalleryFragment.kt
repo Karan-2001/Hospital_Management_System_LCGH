@@ -1,6 +1,5 @@
 package com.example.lion_nav_barhomepage.Gallery
 
-import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.lion_nav_barhomepage.R
 import com.example.lion_nav_barhomepage.databinding.FragmentGalleryBinding
+import com.example.lion_nav_barhomepage.patientdashboard.MedicinesFragment
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -18,20 +18,21 @@ import com.example.lion_nav_barhomepage.databinding.FragmentGalleryBinding
 //private const val ARG_PARAM2 = "param2"
 private var _binding:FragmentGalleryBinding? = null
 private val binding get() = _binding!!
-private lateinit var gridView: GridView
-var data_img: ArrayList<Int> = arrayListOf(
-    R.drawable.img1,R.drawable.img2,R.drawable.imge,R.drawable.img4,R.drawable.img5
-)
+
+
+
 
 /**
  * A simple [Fragment] subclass.
  * Use the [GalleryFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class GalleryFragment : Fragment() {
+class GalleryFragment : Fragment(), AdapterView.OnItemClickListener {
     // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private var gridView: GridView?= null
+    private var imglist: ArrayList<image>? = null
+    private var imageadapter:ImageAdapter? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,7 +55,10 @@ class GalleryFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         gridView = binding.PhotoGrid
-        gridView.adapter = ImageAdapter(data_img, this)
+        imglist= ArrayList()
+        imglist=setData()
+        gridView?.adapter = imglist?.let { ImageAdapter(this, it) }
+        gridView!!.onItemClickListener = this
         (activity as AppCompatActivity).supportActionBar?.title="Gallery"
         // gridView.setOnItemClickListener(AdapterView.OnItemClickListener(){
         //  fun onItemClick(
@@ -78,23 +82,29 @@ class GalleryFragment : Fragment() {
 
 
     }
+
+    private fun setData(): ArrayList<image>? {
+        var imagelist: ArrayList<image> = ArrayList()
+        imagelist.add(image(R.drawable.img1))
+        imagelist.add(image(R.drawable.img2))
+        imagelist.add(image(R.drawable.imge))
+        imagelist.add(image(R.drawable.img4))
+        imagelist.add(image(R.drawable.img5))
+
+        return imagelist
+    }
+
+    override fun onItemClick(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+        var items: image = imglist!!.get(p2)
+        replaceFragment(MedicinesFragment())
+    }
+    fun replaceFragment(fragment: Fragment) {
+        val fragmentManager = parentFragmentManager
+        val fragmentTransaction = fragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.framelayout, fragment)
+        fragmentTransaction.commit()
+
+    }
+
+
 }
-        // companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment GalleryFragment.
-         */
-        //  // TODO: Rename and change types and number of parameters
-        //  @JvmStatic
-        //  fun newInstance(param1: String, param2: String) =
-        //  GalleryFragment().apply {
-        //   arguments = Bundle().apply {
-        //    putString(ARG_PARAM1, param1)
-        //   putString(ARG_PARAM2, param2)
-        //  }
-        //  }
-        // }

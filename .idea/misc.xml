@@ -64,7 +64,7 @@
         <entry key="app/src/main/res/layout/fragment_edit_profile.xml" value="0.26101531982421877" />
         <entry key="app/src/main/res/layout/fragment_facilities.xml" value="0.34739583333333335" />
         <entry key="app/src/main/res/layout/fragment_first.xml" value="0.2851646002565199" />
-        <entry key="app/src/main/res/layout/fragment_gallery.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_gallery.xml" value="0.21142592715077188" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.17462985679751536" />
         <entry key="app/src/main/res/layout/fragment_login_tab.xml" value="0.34074390765284307" />
         <entry key="app/src/main/res/layout/fragment_medicines.xml" value="0.2851646002565199" />
@@ -75,6 +75,7 @@
         <entry key="app/src/main/res/layout/fragment_register_tab.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_reports.xml" value="0.26849080803762293" />
         <entry key="app/src/main/res/layout/fragment_vaccines.xml" value="0.2530349013657056" />
+        <entry key="app/src/main/res/layout/gallaryimage.xml" value="0.24583155194527576" />
         <entry key="app/src/main/res/layout/image_container.xml" value="0.1" />
         <entry key="app/src/main/res/layout/item_about.xml" value="0.3158173427634818" />
         <entry key="app/src/main/res/layout/item_avl.xml" value="0.521520141940961" />

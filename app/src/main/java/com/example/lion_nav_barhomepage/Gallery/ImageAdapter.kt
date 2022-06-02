@@ -1,39 +1,40 @@
 package com.example.lion_nav_barhomepage.Gallery
 
+import android.annotation.SuppressLint
 import android.content.Context
+import android.media.Image
 import android.view.View
 import android.widget.BaseAdapter
 import android.view.ViewGroup
 import android.widget.ImageView
+import com.example.lion_nav_barhomepage.R
+import com.example.lion_nav_barhomepage.context_activity
+import com.example.lion_nav_barhomepage.doctors.DoctorsFragment
+import com.example.lion_nav_barhomepage.doctors.data
 
-class ImageAdapter(data: ArrayList<Int>, galleryFragment: GalleryFragment) : BaseAdapter() {
-    private var myThumbIds: List<Int>? = null
-    private var mContext: Context? = null
-    fun ImageAdapter(myThumbIds: List<Int>?, mContext: Context?) {
-        this.mContext = mContext
-        this.myThumbIds = myThumbIds
-    }
+class ImageAdapter(val context: GalleryFragment, var img_list: ArrayList<image>) : BaseAdapter() {
+
 
     override fun getCount(): Int {
-        return myThumbIds!!.size
+        return img_list.size
     }
 
     override fun getItem(i: Int): Any {
-        return 0
+        return img_list.get(i)
     }
 
     override fun getItemId(i: Int): Long {
-        return myThumbIds!![i].toLong()
+        return i.toLong()
     }
 
+    @SuppressLint("ViewHolder")
     override fun getView(i: Int, view: View, viewGroup: ViewGroup): View {
-        var imageView = view as ImageView
-        if (imageView == null) {
-            imageView = ImageView(mContext)
-            imageView.layoutParams = ViewGroup.LayoutParams(350, 450)
-            imageView.scaleType = ImageView.ScaleType.CENTER_CROP
-        }
-        imageView.setImageResource(myThumbIds!![i])
-        return imageView
+        var view:View=View.inflate(context_activity, R.layout.gallaryimage,null)
+       var img:ImageView=view.findViewById(R.id.image)
+        var listItems: image =img_list.get(i)
+    img.setImageResource(listItems.img_url!!.toInt())
+
+        return view
     }
 }
+
