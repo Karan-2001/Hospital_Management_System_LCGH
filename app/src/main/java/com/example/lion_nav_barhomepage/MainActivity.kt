@@ -23,12 +23,20 @@ import com.example.lion_nav_barhomepage.Appointment.AppointmentFragment
 import com.example.lion_nav_barhomepage.Contact.ContactFragment
 import com.example.lion_nav_barhomepage.Covid.CovidFragment
 import com.example.lion_nav_barhomepage.Facilities.FacilitiesFragment
-import com.example.lion_nav_barhomepage.Gallery.GalleryFragment
 import com.example.lion_nav_barhomepage.Home.HomeFragment
+import com.example.lion_nav_barhomepage.News.NewsFragment
+import com.example.lion_nav_barhomepage.News.NewsImageFragment
+import com.example.lion_nav_barhomepage.Vaccines.BookVaccineFragment
+import com.example.lion_nav_barhomepage.Vaccines.NewVaccinesFragment
+import com.example.lion_nav_barhomepage.Vaccines.VaccineInfoFragment
 import com.example.lion_nav_barhomepage.about.AboutFragment
+import com.example.lion_nav_barhomepage.about.AboutUsFragment
+import com.example.lion_nav_barhomepage.about.MandVFragment
+import com.example.lion_nav_barhomepage.about.OurTeamFragment
 import com.example.lion_nav_barhomepage.doctors.DoctorsFragment
 import com.example.lion_nav_barhomepage.doctors.DoctorsProfileFragment
 import com.example.lion_nav_barhomepage.doctors.DoctorsViewModel
+import com.example.lion_nav_barhomepage.gallery.ImageFragment
 import com.example.lion_nav_barhomepage.patientdashboard.*
 import com.example.lion_nav_barhomepage.patientdashboard.appointment.PatientAppointmentsFragment
 import com.example.lion_nav_barhomepage.patientdashboard.diagnosis.DiagnosisFragment
@@ -43,9 +51,9 @@ var flag=0
 class MainActivity : AppCompatActivity() {
     lateinit var toggle: ActionBarDrawerToggle
     lateinit var drawerLayout: DrawerLayout
-    lateinit var username  : TextView
-    lateinit var useremail : TextView
-    lateinit var userimg : ImageView
+    lateinit var username: TextView
+    lateinit var useremail: TextView
+    lateinit var userimg: ImageView
     lateinit var sharedPreferences: SharedPreferences
     private val viewModel: DoctorsViewModel by viewModels()
     var img_url = patient_main_data.img_url
@@ -54,7 +62,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
 
-        sharedPreferences=this.getSharedPreferences("login",
+        sharedPreferences = this.getSharedPreferences(
+            "login",
             MODE_PRIVATE
         )
 
@@ -63,7 +72,7 @@ class MainActivity : AppCompatActivity() {
         val headerLayout = navView.getHeaderView(0)
 
         val nav_drawer_header = headerLayout.findViewById(R.id.profile) as LinearLayout
-         username = headerLayout.findViewById(R.id.user_name) as TextView
+        username = headerLayout.findViewById(R.id.user_name) as TextView
         useremail = headerLayout.findViewById(R.id.user_email) as TextView
         userimg = headerLayout.findViewById(R.id.userimg) as ImageView
 
@@ -72,48 +81,47 @@ class MainActivity : AppCompatActivity() {
         val checklogin = sharedPreferences.getBoolean("logged", false)
 //----------------
 
-if (checklogin == false) {
-                username.setText("Guest User")
-                userimg.setImageResource(R.drawable.user_icon)
-                useremail.setText("")
-    nav_drawer_header.setOnClickListener {
-        val dialogBuilder = AlertDialog.Builder(this)
-        dialogBuilder.setMessage("Please Register")
-            .setCancelable(true)
-        dialogBuilder.setPositiveButton("Cancel ") { dialog, id ->
-        }
-        dialogBuilder.setNegativeButton("Register") { dialog, id ->
-            val intent = Intent(this, LoginActivity::class.java)
-            startActivity(intent)
+        if (checklogin == false) {
+            username.setText("Guest User")
+            userimg.setImageResource(R.drawable.user_icon)
+            useremail.setText("")
+            nav_drawer_header.setOnClickListener {
+                val dialogBuilder = AlertDialog.Builder(this)
+                dialogBuilder.setMessage("Please Register")
+                    .setCancelable(true)
+                dialogBuilder.setPositiveButton("Cancel ") { dialog, id ->
+                }
+                dialogBuilder.setNegativeButton("Register") { dialog, id ->
+                    val intent = Intent(this, LoginActivity::class.java)
+                    startActivity(intent)
 
-        }
+                }
 
-        val alert = dialogBuilder.create()
-        alert.show()
-    }
-
+                val alert = dialogBuilder.create()
+                alert.show()
             }
-else {
 
 
-    if (img_url == ""){
-        userimg.setImageResource(R.drawable.user_icon)
-    }
-    else {
-        userimg.load(img_url?.toUri()) {
-            placeholder(R.drawable.loading_animation)
-            error(R.drawable.ic_broken_image)
+        } else {
+
+
+            if (img_url == "") {
+                userimg.setImageResource(R.drawable.user_icon)
+            } else {
+                userimg.load(img_url?.toUri()) {
+                    placeholder(R.drawable.loading_animation)
+                    error(R.drawable.ic_broken_image)
+                }
+            }
+
+            Log.e("In main viewmodel ::", "${patient_main_data}")
+            username.setText(patient_main_data.name.toString())
+            useremail.setText(patient_main_data.email.toString())
+            nav_drawer_header.setOnClickListener {
+                replaceFragment(PatientProfileFragment(), "Patient Profile")
+            }
+
         }
-    }
-
-    Log.e("In main viewmodel ::", "${patient_main_data}")
-    username.setText(patient_main_data.name.toString())
-    useremail.setText(patient_main_data.email.toString())
-    nav_drawer_header.setOnClickListener {
-        replaceFragment(PatientProfileFragment(), "Patient Profile")
-    }
-
-}
 
 
         toggle = ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close)
@@ -128,7 +136,7 @@ else {
 
             override fun onDrawerOpened(drawerView: View) {
                 Log.e("TAG", "onDrawerOpened")
-                if( img_url != patient_main_data.img_url){
+                if (img_url != patient_main_data.img_url) {
                     datachanged()
                     Log.e("TAG", "changed")
                 }
@@ -144,16 +152,19 @@ else {
         })
 
         navView.setNavigationItemSelectedListener {
-            Log.e("open","drawer")
+            Log.e("open", "drawer")
             setcheckbutton(it)
             when (it.itemId) {
                 R.id.nav_home -> replaceFragment(HomeFragment(), it.title.toString())
                 R.id.nav_Doctors -> replaceFragment(DoctorsFragment(), it.title.toString())
                 R.id.nav_appointments -> replaceFragment(AppointmentFragment(), it.title.toString())
+                R.id.nav_vaccines -> replaceFragment(NewVaccinesFragment(), it.title.toString())
                 R.id.nav_facilities -> replaceFragment(FacilitiesFragment(), it.title.toString())
                 R.id.nav_Contact -> replaceFragment(ContactFragment(), it.title.toString())
                 R.id.nav_gallery -> replaceFragment(GalleryFragment(), it.title.toString())
                 R.id.nav_covid -> replaceFragment(CovidFragment(), it.title.toString())
+                R.id.nav_lions -> replaceFragment(ChatBotFragment(), it.title.toString())
+                R.id.nav_news -> replaceFragment(NewsFragment(),it.title.toString())
                 R.id.nav_logout -> logout()
 
                 R.id.nav_about -> replaceFragment(AboutFragment(), it.title.toString())
@@ -163,30 +174,29 @@ else {
         }
     }
 
-     fun datachanged(){
+    fun datachanged() {
 
-         img_url = patient_main_data.img_url
-         if (img_url == ""){
-             userimg.setImageResource(R.drawable.user_icon)
-         }
-         else {
-             userimg.load(img_url?.toUri()) {
-                 placeholder(R.drawable.loading_animation)
-                 error(R.drawable.ic_broken_image)
-             }
-         }
+        img_url = patient_main_data.img_url
+        if (img_url == "") {
+            userimg.setImageResource(R.drawable.user_icon)
+        } else {
+            userimg.load(img_url?.toUri()) {
+                placeholder(R.drawable.loading_animation)
+                error(R.drawable.ic_broken_image)
+            }
+        }
 
-         Log.e("In main viewmodel ::", "${patient_main_data}")
-         username.setText(patient_main_data.name.toString())
-         useremail.setText(patient_main_data.email.toString())
+        Log.e("In main viewmodel ::", "${patient_main_data}")
+        username.setText(patient_main_data.name.toString())
+        useremail.setText(patient_main_data.email.toString())
 
-     }
+    }
 
 
     private fun logout() {
 
         sharedPreferences = getSharedPreferences("login", MODE_PRIVATE)
-        sharedPreferences.edit().putBoolean("logged",false).apply()
+        sharedPreferences.edit().putBoolean("logged", false).apply()
         Toast.makeText(
             applicationContext,
             "logging out from account",
@@ -197,8 +207,8 @@ else {
     }
 
     private fun setcheckbutton(menuItem: MenuItem) {
-        menuItem.isChecked=false
-        val id = supportFragmentManager.findFragmentById(R.id.framelayout )
+        menuItem.isChecked = false
+        val id = supportFragmentManager.findFragmentById(R.id.framelayout)
         val navView: NavigationView = findViewById(R.id.nav_view)
         when (id) {
 //            is PatientProfileFragment -> menuItem.isChecked=false
@@ -207,11 +217,13 @@ else {
             is DoctorsProfileFragment -> navView.setCheckedItem(R.id.nav_Doctors)
             is FacilitiesFragment -> navView.setCheckedItem(R.id.nav_facilities)
             is CovidFragment -> navView.setCheckedItem(R.id.nav_covid)
+            is ChatBotFragment -> navView.setCheckedItem(R.id.nav_lions)
             is AboutFragment -> navView.setCheckedItem(R.id.nav_about)
             is ContactFragment -> navView.setCheckedItem(R.id.nav_Contact)
             is GalleryFragment -> navView.setCheckedItem(R.id.nav_gallery)
             is AppointmentFragment -> navView.setCheckedItem(R.id.nav_appointments)
-            else -> menuItem.isChecked=false
+            is NewsFragment->navView.setCheckedItem(R.id.nav_news)
+            else -> menuItem.isChecked = false
         }
 
     }
@@ -236,49 +248,67 @@ else {
     }
 
     override fun onBackPressed() {
-        val id = supportFragmentManager.findFragmentById(R.id.framelayout )
-        if( id  is PatientAppointmentsFragment ||
-            id  is VaccinesFragment ||
-            id  is ReportsFragment ||
-            id  is HistoryFragment ||
-            id  is DiagnosisFragment ||
-            id  is MedicinesFragment ||
-            id is EditProfileFragment    ){
-            replaceFragment(PatientProfileFragment(),"Patient Profile")
-        }
-        else if(id is DoctorsProfileFragment){
-            viewModel.setposition(-1)
-            replaceFragment(DoctorsFragment(), "Doctors")
+        val id = supportFragmentManager.findFragmentById(R.id.framelayout)
+        if (id is PatientAppointmentsFragment ||
+            id is VaccinesFragment ||
+            id is ReportsFragment ||
+            id is DiagnosisFragment ||
+            id is MedicinesFragment ||
+            id is EditProfileFragment
+        ) {
+            replaceFragment(PatientProfileFragment(), "Patient Profile")
+        }else if (id is AboutUsFragment ||
+                id is OurTeamFragment ||
+                id is MandVFragment
+            ) {
+                replaceFragment(AboutFragment(), "About Us")
 
-        }
-        else if(id is PresFragment){
+            } else if (id is DoctorsProfileFragment) {
+                viewModel.setposition(-1)
+                replaceFragment(DoctorsFragment(), "Doctors")
 
-            replaceFragment(DiagnosisFragment(), "Diagnosis")
+            } else if (id is PresFragment) {
 
-        } else if(id is pdfactivity){
-            Log.e("back","${pdfactivity().getflag()}")
-                    if(pdfactivity().getflag() ==1) {
-                        replaceFragment(ReportsFragment(), "Reports")
-                    }
-            else if(pdfactivity().getflag() ==2){
-                        replaceFragment(VaccinesFragment(), "Vaccines")
-                    }
+                replaceFragment(DiagnosisFragment(), "Diagnosis")
 
-        }
+            } else if (id is pdfactivity) {
+                Log.e("back", "${pdfactivity().getflag()}")
+                if (pdfactivity().getflag() == 1) {
+                    replaceFragment(ReportsFragment(), "Reports")
+                } else if (PdfDialogFragment().getflag() == 2) {
+                    replaceFragment(VaccinesFragment(), "Vaccines")
+                }
 
-        else if(id is AddVaccineFragment){
-            replaceFragment(VaccinesFragment(),"Vaccines")
-        } else if(id is AddReportsFragment){
-            replaceFragment(ReportsFragment(),"Reports")
+            } else if (id is AddVaccineFragment) {
+                replaceFragment(VaccinesFragment(), "Vaccines")
+            } else if (id is AddReportsFragment) {
+                replaceFragment(ReportsFragment(), "Reports")
+            } else if (id is ImageFragment) {
+                replaceFragment(GalleryFragment(), "Gallery")
+            }else if (id is NewsImageFragment) {
+            replaceFragment(NewsFragment(), "News")
         }
-
-        else if(id is HomeFragment){
-            replaceFragment(HomeFragment(),"Home")
+        else if (id is ImageFragment) {
+            replaceFragment(GalleryFragment(), "Gallery")
         }
-        else if (id !is HomeFragment){
-            replaceFragment(HomeFragment(), "Home")
+        else if (id is BookVaccineFragment) {
+            replaceFragment(VaccineInfoFragment(), "Vaccine")
         }
-        else {super.onBackPressed()}
+        else if (id is VaccineInfoFragment) {
+            replaceFragment(NewVaccinesFragment(), "Vaccine")
+        }
+        else if (id !is HomeFragment) {
+                replaceFragment(HomeFragment(), "Home")
+            }
+        else if ( id is HomeFragment){
+            val intent = Intent(Intent.ACTION_MAIN)
+            intent.addCategory(Intent.CATEGORY_HOME);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent)
+        }
+        else {
+                super.onBackPressed()
+            }
 
 //        override fun onBackPressed() {
 //            val count = supportFragmentManager.backStackEntryCount
@@ -288,9 +318,10 @@ else {
 //            } else {
 //                supportFragmentManager.popBackStack()
 //            }
+        }
+
     }
 
-}
 
 
 

@@ -217,9 +217,9 @@
                 android:id='@+id/highlights'
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="40dp"
+                android:layout_marginStart="35dp"
                 android:layout_marginTop="20dp"
-                android:shadowColor="#B5F8C85F"
+                android:shadowColor="#A5F8C85F"
                 android:shadowDx="4"
                 android:shadowDy="4"
                 android:shadowRadius="2"
@@ -250,27 +250,360 @@
             <!--                app:layout_constraintHorizontal_bias="0.51"-->
             <!--                app:layout_constraintStart_toStartOf="parent"-->
             <!--                app:layout_constraintTop_toBottomOf="@+id/highlights" />-->
-            <androidx.viewpager2.widget.ViewPager2
+<!--            <androidx.viewpager2.widget.ViewPager2-->
+<!--                android:id="@+id/imageSlider"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="225dp"-->
+<!--                android:layout_marginStart="23dp"-->
+<!--                android:layout_marginTop="10dp"-->
+<!--                android:layout_marginEnd="23dp"-->
+<!--                android:layout_marginBottom="10dp"-->
+<!--                android:paddingStart="80dp"-->
+<!--                android:paddingEnd="80dp"-->
+<!--                app:layout_constraintBottom_toTopOf="@id/stats"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintHorizontal_bias="0.5"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/highlights" />-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:id="@+id/imageSlider"
-                android:layout_width="0dp"
-                android:layout_height="225dp"
-                android:layout_marginStart="23dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="23dp"
-                android:layout_marginBottom="10dp"
-                android:paddingStart="80dp"
-                android:paddingEnd="80dp"
-                app:layout_constraintBottom_toTopOf="@id/stats"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintTop_toBottomOf="@id/highlights"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/highlights" />
+                app:layout_constraintEnd_toEndOf="parent"
+                 app:layout_constraintBottom_toTopOf="@+id/stats"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:background="#27FFD26B"
+                android:layout_marginBottom="15dp"
+                android:layout_marginTop="15dp">
+
+                <LinearLayout
+                    android:id="@+id/todaysupdates"
+                    android:layout_width="105dp"
+                    android:layout_height="160dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="7dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="#B1F9D47F"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:shadowColor="#ffffff"
+                        android:shadowDx="4"
+                        android:shadowDy="4"
+                        android:shadowRadius="2"
+                        android:text="Todays Updates"
+
+                        android:textAllCaps="false"
+                        android:textColor="#022896"
+                        android:textSize="22sp"
+                        android:textStyle="bold" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="3dp"
+                        android:layout_marginStart="2.5dp"
+                        android:layout_marginEnd="2.5dp"
+                        android:background="#0130B7" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1.5dp"
+                        android:layout_marginStart="2.5dp"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginEnd="2.5dp"
+                        android:background="#0130B7" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:shadowColor="#ffffff"
+                        android:shadowDx="4"
+                        android:shadowDy="4"
+                        android:shadowRadius="2"
+                        android:text="Appointments, vitals and more..."
+
+                        android:textAllCaps="false"
+                        android:textColor="#022896"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginStart="80dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/ic_baseline_arrow_circle_right_24"
+                        android:backgroundTint="#022896" />
+                </LinearLayout>m
+
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:layout_marginTop="16.5dp"
+                    android:layout_toEndOf="@id/todaysupdates">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="150dp"
+                        android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:id="@+id/recentapt"
+                        android:layout_width="180dp"
+                        android:layout_height="150dp"
+                        android:background="@drawable/homerecyclerviewbackground"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Appointment Updates"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            android:shadowColor="#000C2F"
+                            android:shadowDx="4"
+                            android:shadowDy="4"
+                            android:shadowRadius="2"
+                            android:layout_marginStart="12dp"
+                            android:layout_marginTop="11dp"
+                            android:textAllCaps="false"
+                            android:textColor="#ffffff"/>
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1.5dp"
+                            android:layout_marginStart="7dp"
+                            android:layout_marginEnd="7dp"
+                            android:layout_marginTop="3.5dp"
+                            android:background="#FFFFFF" />
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginTop="8dp">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+
+                                android:text="Doctor Name:"
+                                android:textSize="12sp"
+                                android:textStyle="bold"
+                                android:shadowColor="#000C2F"
+                                android:shadowDx="4"
+                                android:shadowDy="4"
+                                android:shadowRadius="2"
+                                android:layout_marginStart="12dp"
+                                android:textAllCaps="false"
+                                android:textColor="#ffffff"/>
+                            <TextView
+                                android:id="@+id/doc_n"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="12sp"
+                                android:textStyle="bold"
+                                android:shadowColor="#000C2F"
+                                android:shadowDx="4"
+                                android:shadowDy="4"
+                                android:shadowRadius="2"
+                                android:layout_marginStart="2dp"
+                                android:textAllCaps="false"
+                                android:textColor="#ffffff"/>
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_marginTop="8dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                            <TextView
+
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Date:"
+                                android:textSize="12sp"
+                                android:textStyle="bold"
+                                android:shadowColor="#000C2F"
+                                android:shadowDx="4"
+                                android:shadowDy="4"
+                                android:shadowRadius="2"
+                                android:layout_marginStart="12dp"
+                                android:textAllCaps="false"
+                                android:textColor="#ffffff"/>
+                            <TextView
+                                android:id="@+id/apt_det_date"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="12sp"
+                                android:textStyle="bold"
+                                android:shadowColor="#000C2F"
+                                android:shadowDx="4"
+                                android:shadowDy="4"
+                                android:shadowRadius="2"
+                                android:layout_marginStart="2dp"
+                                android:textAllCaps="false"
+                                android:textColor="#ffffff"/>
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_marginTop="8dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Time:"
+                                android:textSize="12sp"
+                                android:textStyle="bold"
+                                android:shadowColor="#000C2F"
+                                android:shadowDx="4"
+                                android:shadowDy="4"
+                                android:shadowRadius="2"
+                                android:layout_marginStart="12dp"
+                                android:textAllCaps="false"
+                                android:textColor="#ffffff"/>
+                            <TextView
+                                android:id="@+id/apt_det_time"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="12sp"
+                                android:textStyle="bold"
+                                android:shadowColor="#000C2F"
+                                android:shadowDx="4"
+                                android:shadowDy="4"
+                                android:shadowRadius="2"
+                                android:layout_marginStart="2dp"
+                                android:textAllCaps="false"
+                                android:textColor="#ffffff"/>
+                        </LinearLayout>
+
+
+
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/vitals"
+                        android:layout_width="180dp"
+                        android:layout_height="150dp"
+                        android:background="@drawable/homerecyclerviewbackground"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Patient Vitals"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            android:shadowColor="#000C2F"
+                            android:shadowDx="4"
+                            android:shadowDy="4"
+                            android:shadowRadius="2"
+                            android:layout_marginStart="12dp"
+                            android:layout_marginTop="11dp"
+                            android:textAllCaps="false"
+                            android:textColor="#ffffff"/>
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1.5dp"
+                            android:layout_marginStart="7dp"
+                            android:layout_marginEnd="7dp"
+                            android:layout_marginTop="25dp"
+                            android:background="#FFFFFF" />
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginTop="8dp">
+                            <ImageView
+                                android:layout_width="17dp"
+                                android:layout_height="17dp"
+                                android:background="@drawable/weight_svgrepo_com_2"
+                                android:layout_marginStart="12dp"
+                                android:backgroundTint="@color/white"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+
+                                android:text="Weight:"
+                                android:textSize="12sp"
+                                android:textStyle="bold"
+                                android:shadowColor="#000C2F"
+                                android:shadowDx="4"
+                                android:shadowDy="4"
+                                android:shadowRadius="2"
+                                android:layout_marginStart="12dp"
+                                android:textAllCaps="false"
+                                android:textColor="#ffffff"/>
+                            <TextView
+                                android:id="@+id/pheight"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="12sp"
+                                android:textStyle="bold"
+                                android:shadowColor="#000C2F"
+                                android:shadowDx="4"
+                                android:shadowDy="4"
+                                android:shadowRadius="2"
+                                android:layout_marginStart="2dp"
+                                android:textAllCaps="false"
+                                android:textColor="#ffffff"/>
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_marginTop="8dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                            <ImageView
+                                android:layout_width="17dp"
+                                android:layout_height="17dp"
+                                android:background="@drawable/body_height_svgrepo_com"
+                                android:layout_marginStart="13dp"
+                                android:backgroundTint="@color/white"/>
+                            <TextView
+
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Height:"
+                                android:textSize="12sp"
+                                android:textStyle="bold"
+                                android:shadowColor="#000C2F"
+                                android:shadowDx="4"
+                                android:shadowDy="4"
+                                android:shadowRadius="2"
+                                android:layout_marginStart="12dp"
+                                android:textAllCaps="false"
+                                android:textColor="#ffffff"/>
+                            <TextView
+                                android:id="@+id/Pweight"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="12sp"
+                                android:textStyle="bold"
+                                android:shadowColor="#000C2F"
+                                android:shadowDx="4"
+                                android:shadowDy="4"
+                                android:shadowRadius="2"
+                                android:layout_marginStart="2dp"
+                                android:textAllCaps="false"
+                                android:textColor="#ffffff"/>
+                        </LinearLayout>
+
+                    </LinearLayout>
+                    </LinearLayout>
+
+                </HorizontalScrollView>
+
+            </RelativeLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
                 android:layout_marginStart="23dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="25dp"
                 android:layout_marginEnd="23dp"
                 android:layout_marginBottom="10dp"
                 android:background="#4705239C"
@@ -283,90 +616,69 @@
                 android:id="@+id/stats"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="25dp"
-                android:text="Covid stats"
-                android:textSize="24sp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="20dp"
+                android:shadowColor="#B5F8C85F"
+                android:shadowDx="4"
+                android:shadowDy="4"
+                android:shadowRadius="2"
+                android:text="News"
+                android:textColor="#022896"
+                android:textSize="26sp"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.03"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/imageSlider" />
-
-            <TextView
-                android:id="@+id/active"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="25dp"
-                android:text="Active \nCases"
+            <Button
+                android:layout_width="170dp"
+                android:layout_height="130dp"
+                android:id="@+id/healthnews"
+                android:layout_marginTop="18dp"
+                android:layout_marginStart="10dp"
+                android:shadowColor="#000000"
+                android:shadowDx="7"
+                android:paddingBottom="2dp"
+                android:paddingRight="4dp"
+                android:shadowDy="4"
+                android:shadowRadius="2"
+                android:textColor="@color/white"
+                android:textStyle="bold"
                 android:textSize="18sp"
-                app:layout_constraintEnd_toStartOf="@id/recovered"
-                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintTop_toBottomOf="@id/stats"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/stats" />
+                app:layout_constraintEnd_toStartOf="@id/lcghnews"
+                android:layout_marginBottom="30dp"
+                android:text="Health News"
+                android:background="@drawable/news_b" />
 
-            <TextView
-                android:id="@+id/recovered"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="25dp"
-                android:text="Recovered \nCases"
-                android:textAlignment="center"
+
+            <Button
+                android:layout_marginEnd="10dp"
+                android:layout_width="170dp"
+                android:layout_height="130dp"
+                android:id="@+id/lcghnews"
+                android:layout_marginTop="18dp"
+                android:shadowColor="#000000"
+                android:shadowDx="7"
+                android:paddingBottom="2dp"
+                android:paddingRight="4dp"
+                android:shadowDy="4"
+                android:shadowRadius="2"
+                android:textColor="@color/white"
+                android:textStyle="bold"
                 android:textSize="18sp"
-                app:layout_constraintEnd_toEndOf="@id/death"
-                app:layout_constraintHorizontal_bias="0.33"
-                app:layout_constraintStart_toEndOf="@id/active"
-                app:layout_constraintTop_toBottomOf="@id/stats" />
-
-            <TextView
-                android:id="@+id/death"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="25dp"
-                android:text="Deaths"
-                android:textSize="18sp"
+                app:layout_constraintTop_toBottomOf="@id/stats"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/healthnews"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/recovered"
-                app:layout_constraintTop_toBottomOf="@id/stats" />
+                android:text="LCGH News"
+                android:background="@drawable/news_b"
+                android:layout_marginBottom="30dp"/>
 
-            <TextView
-                android:id="@+id/acases"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
 
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="40dp"
-                android:text="28"
-                android:textAlignment="center"
-                android:textSize="24sp"
-                app:layout_constraintEnd_toStartOf="@id/rcases"
-                app:layout_constraintHorizontal_bias="0.48"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/active" />
 
-            <TextView
-                android:id="@+id/rcases"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="40dp"
-                android:text="28"
-                android:textAlignment="center"
-                android:textSize="24dp"
-                app:layout_constraintEnd_toStartOf="@id/dcases"
-                app:layout_constraintStart_toEndOf="@id/acases"
-                app:layout_constraintTop_toBottomOf="@id/recovered" />
-
-            <TextView
-                android:id="@+id/dcases"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="40dp"
-                android:layout_marginTop="60dp"
-                android:text="28"
-                android:textAlignment="center"
-                android:textSize="24sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/rcases"
-                app:layout_constraintTop_toBottomOf="@id/death" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

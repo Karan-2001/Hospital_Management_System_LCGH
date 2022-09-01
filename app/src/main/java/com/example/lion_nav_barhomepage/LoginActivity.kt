@@ -28,8 +28,7 @@ class LoginActivity : AppCompatActivity() {
         sharedPreferences=getSharedPreferences("login", MODE_PRIVATE)
         val v=0.0f
         val tabLayout: TabLayout = findViewById(R.id.tab)
-        val fb: FloatingActionButton = findViewById(R.id.facebook)
-        val google: FloatingActionButton = findViewById(R.id.google_logo);
+
         tabLayout.addTab(tabLayout.newTab().setText("Register"));
         tabLayout.addTab(tabLayout.newTab().setText("Login"));
         val viewPager: ViewPager = findViewById(R.id.viewpage)
@@ -58,15 +57,11 @@ class LoginActivity : AppCompatActivity() {
         })
 
 
-        fb.setTranslationY(300F)
-        google.setTranslationY(300F)
+
         tabLayout.setTranslationY(300F)
-        fb.setAlpha(v)
-        google.setAlpha(v)
+
         tabLayout.setAlpha(v)
 
-        fb.animate().translationY(0F).alpha(1F).setDuration(1000).setStartDelay(400).start()
-        google.animate().translationY(0F).alpha(1F).setDuration(1000).setStartDelay(400).start()
         tabLayout.animate().translationY(0F).alpha(1F).setDuration(1000).setStartDelay(400).start()
 
     }

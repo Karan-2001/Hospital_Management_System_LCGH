@@ -2,8 +2,8 @@
     <!-- Base application theme. -->
     <style name="Theme.Lionnavbarhomepage" parent="Theme.AppCompat.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">#FF5DC9FA</item>
-        <item name="colorPrimaryVariant">#33BCFA</item>
+        <item name="colorPrimary">#003B93</item>
+        <item name="colorPrimaryVariant">#134F98</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
@@ -34,8 +34,17 @@
 
     <style name="Circular">
         <item name="cornerSize">50%</item>
-
     </style>
+        <style name="roundedcorners">
+            <item name ="cornerFamily">rounded</item>
+            <item name ="cornerSize">20dp</item>
+        </style>
+
+    <style name="Widget.BottomNavigationView" parent="Widget.Design.BottomNavigationView">
+        <item name="fontFamily">@font/manrope_medium</item>
+    </style>
+
+
 
     <style name="Theme.Lionnavbarhomepage.NoActionBar">
         <item name="windowActionBar">false</item>
@@ -47,6 +56,30 @@
     </style>
 
     <style name="Theme.Lionnavbarhomepage.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="heading_text_bold" >
+        <item name="android:fontFamily">@font/manrope_extrabold</item>
+        <item name="android:textSize">@dimen/large_textSize</item>
+        <item name="android:textColor">@color/defaultTextColor</item>
+    </style>
 
+    <style name="heading_text_medium">
+        <item name="android:fontFamily">@font/manrope_medium</item>
+        <item name="android:textSize">@dimen/medium_textSize</item>
+        <item name="android:textColor">@color/defaultTextColor</item>
+    </style>
+    <style name="heading_text_medium_bold">
+        <item name="android:fontFamily">@font/manrope_bold</item>
+        <item name="android:textSize">@dimen/medium_textSize</item>
+        <item name="android:textColor">@color/defaultTextColor</item>
+    </style>
+
+    <style name="body_text_regular">
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">@dimen/medium_textSize</item>
+        <item name="android:textColor">@color/defaultTextColor</item>
+    </style>
+    <style name="MyDialog" parent="Base.Theme.AppCompat.Light.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
     <style name="Theme.Lionnavbarhomepage.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

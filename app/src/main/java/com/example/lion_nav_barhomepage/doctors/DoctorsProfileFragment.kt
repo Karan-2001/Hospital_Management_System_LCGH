@@ -62,6 +62,7 @@ class DoctorsProfileFragment : Fragment() {
         val avl : String = viewModel.text
         binding.avl.text=avl
         binding.lang.text=doc?.lang.toString()
+        binding.fee.text=doc?.fee.toString()
         (activity as AppCompatActivity).supportActionBar?.title="Doctors Profile"
         binding.Back.setOnClickListener {
             replaceFragment(DoctorsFragment())

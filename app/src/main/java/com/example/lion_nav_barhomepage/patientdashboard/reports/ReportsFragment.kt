@@ -9,11 +9,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lion_nav_barhomepage.R
 import com.example.lion_nav_barhomepage.databinding.FragmentDiagnosisBinding
 import com.example.lion_nav_barhomepage.databinding.FragmentReportsBinding
+import com.example.lion_nav_barhomepage.doctors.DoctorsFragment
 import com.example.lion_nav_barhomepage.patient_main_data
 import com.example.lion_nav_barhomepage.patientdashboard.diagnosis.DiagnosisAdapter
 import com.example.lion_nav_barhomepage.patientdashboard.diagnosis.diagnosis
@@ -54,6 +56,11 @@ class ReportsFragment : Fragment() , ReportsAdapter.Click,ReportsAdapter.replace
         progressDialog.setMessage("Fetching data....")
         progressDialog.setCancelable(false)
         progressDialog.show()
+        if (!DoctorsFragment().isConnected(requireContext())) {
+            Toast.makeText(requireContext(), "No Internet ", Toast.LENGTH_SHORT).show();
+            Log.e("network--->","if-block")
+            progressDialog.dismiss()
+        }
         reportslist=arrayListOf<reports>()
         db.collection("Reports").whereEqualTo("pemial", patient_main_data.email.toString())
             .get()

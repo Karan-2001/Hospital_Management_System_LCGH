@@ -15,6 +15,10 @@ class ConfirmDialogFragment : DialogFragment() {
     private var _binding: ConfirmAptDialogBinding? = null
     private val binding get() = _binding!!
     private val viewModel: appointmentViewmodel by activityViewModels()
+    override fun onCreate(savedInstanceState: Bundle?) {
+
+        super.onCreate(savedInstanceState)
+    }
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -24,6 +28,7 @@ class ConfirmDialogFragment : DialogFragment() {
         _binding = ConfirmAptDialogBinding.inflate(inflater, container, false)
         val view = binding.root
         return view
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -31,6 +36,10 @@ class ConfirmDialogFragment : DialogFragment() {
         binding.docname.text=data[0]
         binding.date.text=data[1]
         binding.timeslot.text=data[2]
+        binding.ok.setOnClickListener {
+            dismiss()
+        }
         super.onViewCreated(view, savedInstanceState)
+
     }
 }

@@ -9,7 +9,7 @@
     android:layout_marginRight="10dp"
     android:layout_marginTop="20dp"
     app:cardBackgroundColor="@color/white"
-    app:cardCornerRadius="8dp"
+    app:cardCornerRadius="20dp"
     app:cardElevation="8dp"
     app:cardMaxElevation="10dp"
     app:cardPreventCornerOverlap="true">
@@ -31,7 +31,10 @@
     <RelativeLayout
 
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:background="@drawable/team_background"
+        android:layout_margin="10dp">
 
         <!--ImageVIew to display our Course Image-->
 
@@ -41,7 +44,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             android:text="appointment id : "
             android:textColor="@color/black"
             android:textSize="18sp"
@@ -79,7 +82,8 @@
             android:textColor="@color/black"
             android:textSize="18sp"
             android:textStyle="bold" />
-          <TextView
+
+        <TextView
             android:id="@+id/status"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -89,7 +93,8 @@
             android:text="status : "
             android:textColor="@color/black"
             android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:layout_marginBottom="20dp"/>
 
 
     </RelativeLayout>

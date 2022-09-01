@@ -9,12 +9,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lion_nav_barhomepage.Appointment.appointment
 import com.example.lion_nav_barhomepage.databinding.FragmentPatientAppointmentsBinding
 import com.example.lion_nav_barhomepage.doctors.DoctorList
 import com.example.lion_nav_barhomepage.doctors.DoctorsAdapter
+import com.example.lion_nav_barhomepage.doctors.DoctorsFragment
 import com.example.lion_nav_barhomepage.doctors.data
 import com.example.lion_nav_barhomepage.patient_main_data
 import com.google.firebase.database.*
@@ -50,7 +52,11 @@ class PatientAppointmentsFragment : Fragment() {
         progressDialog.setCancelable(false)
         progressDialog.show()
         appointmentlist = arrayListOf<appointment>()
-
+        if (!DoctorsFragment().isConnected(requireContext())) {
+            Toast.makeText(requireContext(), "No Internet ", Toast.LENGTH_SHORT).show();
+            Log.e("network--->","if-block")
+            progressDialog.dismiss()
+        }
            db.collection("Appointment").whereEqualTo("patient_emial", patient_main_data.email.toString())
                .get()
                .addOnSuccessListener {

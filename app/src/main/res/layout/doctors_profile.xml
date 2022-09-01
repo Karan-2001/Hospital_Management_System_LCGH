@@ -98,7 +98,7 @@
 
     <ScrollView
         android:id="@+id/scrollView2"
-        android:layout_width="407dp"
+        android:layout_width="match_parent"
         android:layout_height="300dp"
         android:fillViewport="true"
         android:layout_marginBottom="20dp"
@@ -112,7 +112,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView"
@@ -137,13 +137,15 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:padding="3dp">
+                        android:padding="5dp">
 
                         <ImageView
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
-                            android:layout_marginStart="5dp"
-                            android:padding="2dp" />
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:layout_marginStart="10dp"
+                            android:padding="2dp"
+                            android:src="@drawable/ic_stethoscope_svgrepo_com_2"
+                            app:tint="#757575" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -152,7 +154,7 @@
                             android:layout_marginStart="10dp"
                             android:text="Specialization"
                             android:textColor="#605E5E"
-                            android:textSize="14sp"
+                            android:textSize="16sp"
                             android:textStyle="bold" />
 
 
@@ -162,7 +164,7 @@
                         android:id="@+id/spec"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="40dp"
+                        android:layout_marginLeft="45dp"
                         android:layout_marginBottom="15dp"
                         android:text="General Medicine"
                         android:textColor="@color/black"
@@ -210,7 +212,8 @@
                                 android:layout_width="35dp"
                                 android:layout_height="35dp"
                                 android:padding="5dp"
-                                android:src="@drawable/ic_baseline_person_24" />
+                                android:src="@drawable/ic_baseline_person_24"
+                                app:tint="#757575"/>
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -329,13 +332,15 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:padding="3dp">
+                        android:padding="5dp">
 
                         <ImageView
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
-                            android:layout_marginStart="5dp"
-                            android:padding="2dp" />
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:layout_marginStart="10dp"
+                            android:padding="2dp"
+                            android:src="@drawable/calender_svgrepo_com"
+                            app:tint="#757575" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -344,7 +349,7 @@
                             android:layout_marginStart="10dp"
                             android:text="Availability"
                             android:textColor="#605E5E"
-                            android:textSize="14sp"
+                            android:textSize="16sp"
                             android:textStyle="bold" />
 
 
@@ -390,13 +395,16 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:padding="3dp">
+                        android:padding="5dp">
 
                         <ImageView
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
-                            android:layout_marginStart="5dp"
-                            android:padding="2dp" />
+                            android:layout_width="22dp"
+                            android:layout_height="22dp"
+
+                            android:layout_marginStart="10dp"
+                            android:padding="2dp"
+                            android:src="@drawable/language_svgrepo_com"
+                            app:tint="#757575" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -405,7 +413,7 @@
                             android:layout_marginStart="10dp"
                             android:text="Languages Spoken"
                             android:textColor="#605E5E"
-                            android:textSize="14sp"
+                            android:textSize="16sp"
                             android:textStyle="bold" />
 
 
@@ -426,6 +434,68 @@
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="20dp"
+                app:cardCornerRadius="15dp"
+                app:cardElevation="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cardView4"
+                tools:cardCornerRAdius="5dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="5dp">
+
+                    <ImageView
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+
+                        android:layout_marginStart="10dp"
+                        android:padding="2dp"
+                        android:src="@drawable/money_svgrepo_com"
+                        app:tint="#757575" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="10dp"
+                        android:text="Consulation Fees"
+                        android:textColor="#605E5E"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/fee"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginBottom="30dp"
+                    android:text="500"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

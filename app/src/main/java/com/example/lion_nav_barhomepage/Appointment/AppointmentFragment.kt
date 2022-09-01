@@ -3,6 +3,8 @@ package com.example.lion_nav_barhomepage.Appointment
 
 import android.app.ProgressDialog
 import android.content.DialogInterface
+import android.content.Intent
+import android.content.SharedPreferences
 import android.graphics.Color
 import android.graphics.PorterDuff
 import android.os.Bundle
@@ -17,6 +19,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import com.example.lion_nav_barhomepage.LoginActivity
 import com.example.lion_nav_barhomepage.R
 import com.example.lion_nav_barhomepage.about.CustomDialogFragment
 import com.example.lion_nav_barhomepage.appointmentid
@@ -46,8 +49,12 @@ class AppointmentFragment : Fragment() {
     private val binding get() = _binding!!
     private val viewModel: DoctorsViewModel by activityViewModels()
     private val viewModel1: appointmentViewmodel by activityViewModels()
+    lateinit var sharedPreferences: SharedPreferences
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
+
         super.onCreate(savedInstanceState)
 
     }
@@ -64,6 +71,10 @@ class AppointmentFragment : Fragment() {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         //---------------------------
+        sharedPreferences = this.requireActivity().getSharedPreferences(
+            "login",
+            AppCompatActivity.MODE_PRIVATE
+        )
         val appointmemt=db.collection("Appointment")
         val getid=db.collection("count")
         //---------------------------
@@ -146,56 +157,73 @@ class AppointmentFragment : Fragment() {
         binding.confirm.setOnClickListener {
             val check = binding.avlSlots.isVisible
             Log.e("Check:","$check")
-
-            if(doc==null || selecteddate=="" || slot==""){
-
-                val dialogBuilder = AlertDialog.Builder(requireActivity())
-                dialogBuilder.setMessage("select appropriate data")
+            val checklogin = sharedPreferences.getBoolean("logged", false)
+            if(checklogin==false)
+            {
+                val dialogBuilder = AlertDialog.Builder(requireContext())
+                dialogBuilder.setMessage("Please Register")
                     .setCancelable(true)
+                dialogBuilder.setPositiveButton("Cancel ") { dialog, id ->
+                }
+                dialogBuilder.setNegativeButton("Register") { dialog, id ->
+                    val intent = Intent(this.context, LoginActivity::class.java)
+                    startActivity(intent)
+
+                }
+
                 val alert = dialogBuilder.create()
                 alert.show()
-
-
             }
-            else if (check==true) {
-                val dialogBuilder = AlertDialog.Builder(requireActivity())
-                dialogBuilder.setMessage("select appropriate data")
-                    .setCancelable(true)
-                val alert = dialogBuilder.create()
-                alert.show()
-            }
-
             else {
+                if (doc == null || selecteddate == "" || slot == "") {
+
+                    val dialogBuilder = AlertDialog.Builder(requireActivity())
+                    dialogBuilder.setMessage("select appropriate data")
+                        .setCancelable(true)
+                    val alert = dialogBuilder.create()
+                    alert.show()
 
 
-                viewModel1.set_data(doc.name!!,selecteddate,slot)
-                var dialog = ConfirmDialogFragment()
-                dialog.show(childFragmentManager,"custom")
-                //---------------
+                } else if (check == true) {
+                    val dialogBuilder = AlertDialog.Builder(requireActivity())
+                    dialogBuilder.setMessage("select appropriate data")
+                        .setCancelable(true)
+                    val alert = dialogBuilder.create()
+                    alert.show()
+                } else {
 
-                val aid =(doc.id.toString()+ patient_main_data.id.toString()+ appointmentid)
-                Log.e("id"," $aid")
-                val data = appointment(
-                    aid,
-                    doc.name.toString(),
-                    doc.spec.toString(),
-                    patient_main_data.email,
-                    selecteddate,
-                    slot,
-                    "Pending"
-                )
-                appointmemt.document(aid).set(data)
-                    .addOnSuccessListener {
-                        val newid= appointmentid+ 1
-                        getid.document("appointment").update("id",newid)
-                        Toast.makeText(this.context,"Appointment placed", Toast.LENGTH_LONG).show()
-                    }
-                    .addOnFailureListener{
-                        Toast.makeText(this.context,"Appointment failed", Toast.LENGTH_LONG).show()
 
-                    }
-                Log.e("data","${data}")
-                //--------------
+                    viewModel1.set_data(doc.name!!, selecteddate, slot)
+                    var dialog = ConfirmDialogFragment()
+                    dialog.show(childFragmentManager, "custom")
+                    //---------------
+
+                    val aid = (doc.id.toString() + patient_main_data.id.toString() + appointmentid)
+                    Log.e("id", " $aid")
+                    val data = appointment(
+                        aid,
+                        doc.name.toString(),
+                        doc.spec.toString(),
+                        patient_main_data.email,
+                        selecteddate,
+                        slot,
+                        "Pending"
+                    )
+                    appointmemt.document(aid).set(data)
+                        .addOnSuccessListener {
+                            val newid = appointmentid + 1
+                            getid.document("appointment").update("id", newid)
+                            Toast.makeText(this.context, "Appointment placed", Toast.LENGTH_LONG)
+                                .show()
+                        }
+                        .addOnFailureListener {
+                            Toast.makeText(this.context, "Appointment failed", Toast.LENGTH_LONG)
+                                .show()
+
+                        }
+                    Log.e("data", "${data}")
+                    //--------------
+                }
             }
             Log.e("on","${viewModel1.get_date()}")
 
