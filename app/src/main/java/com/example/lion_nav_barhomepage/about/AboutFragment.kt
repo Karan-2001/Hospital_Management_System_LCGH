@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentActivity
+import com.example.lion_nav_barhomepage.R
 import com.example.lion_nav_barhomepage.databinding.FragmentAboutBinding
 
 // TODO: Rename parameter arguments, choose names that match
@@ -45,17 +46,23 @@ class AboutFragment : Fragment() {
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        (activity as AppCompatActivity).supportActionBar?.title="About Us"
         binding?.aboutBtn?.setOnClickListener{
-             var dialog = CustomDialogFragment()
-            dialog.show(childFragmentManager,"custom")
-            (activity as AppCompatActivity).supportActionBar?.title="About Us"
-           // val myDialogView=LayoutInflater.from(this).inflate(R.layout.about_us_dialog,null)
-           // val mBuilder = AlertDialog.Builder(requireContext())
-           //     .setView(myDialogView)
-           // val mAlertDialog = mBuilder.show()
-          //  mAlertDialog.dismiss()
-
+              replaceFragment(AboutUsFragment())
         }
+        binding?.teamBtn?.setOnClickListener {
+            replaceFragment(OurTeamFragment())
+        }
+        binding?.missionBtn?.setOnClickListener {
+            replaceFragment(MandVFragment())
+        }
+    }
+    fun replaceFragment(fragment: Fragment) {
+        val fragmentManager = parentFragmentManager
+        val fragmentTransaction = fragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.framelayout, fragment)
+        fragmentTransaction.commit()
+
     }
 
 

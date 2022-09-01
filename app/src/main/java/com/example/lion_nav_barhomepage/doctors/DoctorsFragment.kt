@@ -1,21 +1,29 @@
 package com.example.lion_nav_barhomepage.doctors
 
 import android.app.ProgressDialog
+import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
+import android.os.Build
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.RecyclerView
+import androidx.test.core.app.ApplicationProvider
+import androidx.test.core.app.ApplicationProvider.getApplicationContext
 import com.example.lion_nav_barhomepage.R
 import com.example.lion_nav_barhomepage.databinding.FragmentDoctorsBinding
 import com.google.firebase.database.*
-import java.lang.Character.toLowerCase
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -32,7 +40,8 @@ lateinit var DoctorList : ArrayList<data>
 class DoctorsFragment : Fragment() ,DoctorsAdapter.Click ,DoctorsAdapter.replace{
     private var _binding: FragmentDoctorsBinding? = null
     private lateinit var dbref : DatabaseReference
-
+    var slots : MutableList<MutableList<Int>> = mutableListOf(mutableListOf(0,0,0), mutableListOf(0,0,0), mutableListOf(0,0,0), mutableListOf(0,0,0),mutableListOf(0,0,0), mutableListOf(0,0,0), mutableListOf(0,0,0))
+    var avl: MutableList<Int> = mutableListOf(0)
     private val binding get() = _binding!!
     private lateinit var recyclerView: RecyclerView
     private lateinit var search: EditText
@@ -66,13 +75,52 @@ class DoctorsFragment : Fragment() ,DoctorsAdapter.Click ,DoctorsAdapter.replace
 
     }
 
+     fun isConnected(context: Context): Boolean {
+        Log.e("network--->","isconnect called")
+        val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+
+            val network = connectivityManager.activeNetwork ?: return false
+
+            val activeNetwork = connectivityManager.getNetworkCapabilities(network) ?: return false
+
+            return when {
+                activeNetwork.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true
+
+                activeNetwork.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
+
+                else -> false
+            }
+        } else {
+            @Suppress("DEPRECATION") val networkInfo =
+                connectivityManager.activeNetworkInfo ?: return false
+            @Suppress("DEPRECATION")
+            return networkInfo.isConnected
+        }
+
+    }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val progressDialog = ProgressDialog(context)
         progressDialog.setMessage("Fetching data....")
         progressDialog.setCancelable(false)
         progressDialog.show()
+        val fakedata=data(1254646,"name", "spec",
+            "about",
+            "not done yet",
+            "exp",
+            avl as ArrayList<Int>,
+            slots,
+            "lan",
+            "200"
+        )
         DoctorList = arrayListOf<data>()
         dbref = FirebaseDatabase.getInstance().getReference("Doctors")
+        if (!isConnected(requireContext())) {
+            Toast.makeText(requireContext(), "No Internet ", Toast.LENGTH_SHORT).show();
+            Log.e("network--->","if-block")
+            progressDialog.dismiss()
+        }
         dbref.addValueEventListener( object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
 
@@ -82,12 +130,13 @@ class DoctorsFragment : Fragment() ,DoctorsAdapter.Click ,DoctorsAdapter.replace
                         DoctorList.add(doctor!!)
 
                     }
-
+                    DoctorList.remove(fakedata)
                     recyclerView.adapter = DoctorsAdapter(this@DoctorsFragment, DoctorList, this@DoctorsFragment,this@DoctorsFragment)
                     progressDialog.dismiss()
                 }
 
             }
+
 
             override fun onCancelled(error: DatabaseError) {
                 TODO("Not yet implemented")

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".patientdashboard.diagnosis.PresFragment">
 
-<com.example.lion_nav_barhomepage.patientdashboard.diagnosis.ZoomClass
+    <com.example.lion_nav_barhomepage.patientdashboard.diagnosis.ZoomClass
         android:id="@+id/largeImage"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -28,5 +28,10 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/largeImage"
         app:layout_constraintVertical_bias="0.974"
-        app:srcCompat="@drawable/ic_baseline_arrow_downward_24" />
+        android:backgroundTint="#F2F5F7"
+        android:elevation="20dp"
+        android:src="@drawable/ic_baseline_arrow_downward_24"
+        android:tint="#1B3A92"
+        app:backgroundTint="#C11B3A92"
+        app:borderWidth="2dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

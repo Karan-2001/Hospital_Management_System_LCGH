@@ -1,34 +1,35 @@
 package com.example.lion_nav_barhomepage.Facilities
 
+import android.app.ProgressDialog
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.lion_nav_barhomepage.R
-
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [FacilitiesFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
+import androidx.recyclerview.widget.RecyclerView
+import com.denzcoskun.imageslider.constants.ScaleTypes
+import com.denzcoskun.imageslider.models.SlideModel
+import com.example.lion_nav_barhomepage.databinding.FragmentFacilitiesBinding
+import com.example.lion_nav_barhomepage.doctors.DoctorsFragment
+import com.example.lion_nav_barhomepage.patientdashboard.diagnosis.diagnosislist
+import com.google.firebase.firestore.Query
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
+lateinit  var imageList : ArrayList<SlideModel>
+var faclist : ArrayList<facilities> =  arrayListOf<facilities>()
 class FacilitiesFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private lateinit var recyclerView: RecyclerView
+    private var _binding: FragmentFacilitiesBinding? = null
+    private val binding get() = _binding!!
+    private var db = Firebase.firestore
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+
     }
 
     override fun onCreateView(
@@ -36,31 +37,70 @@ class FacilitiesFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(
-            R.layout.fragment_facilities, container, false)
+        _binding = FragmentFacilitiesBinding.inflate(inflater, container, false)
+        val view = binding.root
+        return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         (activity as AppCompatActivity).supportActionBar?.title="Facilities"
         super.onViewCreated(view, savedInstanceState)
-    }
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment FacilitiesFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            FacilitiesFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+        recyclerView = binding.RecyclerView
+        val progressDialog = ProgressDialog(context)
+        progressDialog.setMessage("Fetching data....")
+        progressDialog.setCancelable(false)
+        progressDialog.show()
+        faclist =arrayListOf<facilities>()
+        if (!DoctorsFragment().isConnected(requireContext())) {
+            Toast.makeText(requireContext(), "No Internet ", Toast.LENGTH_SHORT).show();
+            Log.e("network--->","if-block")
+            progressDialog.dismiss()
+        }
+        db.collection("facilities").orderBy("date", Query.Direction.ASCENDING).get()
+            .addOnSuccessListener { datas ->
+                for (i in datas) {
+                    Log.e("list", "${i}")
+                    val obj = facilities(
+                        i.data["fac_id"].toString(),
+                        i.data["text"].toString(),
+                        i.data["date"].toString(),
+                    )
+
+                    faclist.add(obj)
+
                 }
+                recyclerView.adapter = FacilitiesAdapter(faclist,this@FacilitiesFragment)
+
+                progressDialog.dismiss()
+                Log.e("list", "$faclist")
+            }
+            .addOnFailureListener { exception ->
+                Log.e("---->", "Error getting documents: ")
+            }
+        imageList = arrayListOf<SlideModel>()
+
+        progressDialog.setMessage("Fetching data....")
+        progressDialog.setCancelable(false)
+        progressDialog.show()
+        db.collection("facimage").orderBy("date", Query.Direction.ASCENDING).get()
+            .addOnSuccessListener { datas ->
+                for (i in datas) {
+                    Log.e("list", "${i}")
+                    val obj = com.denzcoskun.imageslider.models.SlideModel(
+                        i.data["image"].toString(),
+                        i.data["date"].toString()
+                    )
+
+                    imageList.add(obj)
+                    binding.imageslider.setImageList(imageList, ScaleTypes.FIT)
+
+                }
+
+                progressDialog.dismiss()
+            }
+            .addOnFailureListener { exception ->
+                Log.e("---->", "Error getting documents: ")
             }
     }
-}
+    }
+

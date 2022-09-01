@@ -67,6 +67,8 @@ class RegisterTabFragment : Fragment() {
             var name=binding.signName.text.toString()
             var phone=binding.signPhone.text.toString()
 
+            Log.e("Check::::>","${email}")
+
             val data = patientdata(
                 "0",
                 name,

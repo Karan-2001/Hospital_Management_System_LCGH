@@ -13,11 +13,12 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.lion_nav_barhomepage.R
+import com.example.lion_nav_barhomepage.VaccineCertficateFragment
 import com.example.lion_nav_barhomepage.patientdashboard.diagnosis.DiagnosisAdapter
 import com.example.lion_nav_barhomepage.patientdashboard.reports.pdfactivity
 
 
-class VaccineAdapter (val context: VaccinesFragment, var vaccine_list: ArrayList<vaccine>,
+class VaccineAdapter (val context: VaccineCertficateFragment, var vaccine_list: ArrayList<vaccine>,
                       private val view: VaccineAdapter.Click, private val rep: VaccineAdapter.replace):
     RecyclerView.Adapter<VaccineAdapter.ViewHolder>() {
 

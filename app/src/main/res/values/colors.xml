@@ -7,4 +7,8 @@
     <color name="teal_700">#FFFAC538</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="dialog_color_1">#FDD736</color>
+    <color name="dialog_color_2">#3B5796</color>
+    <color name="defaultTextColor">#000000</color>
+
 </resources>

@@ -13,9 +13,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Lionnavbarhomepage">
         <activity
+            android:name=".CovidActivity"
+            android:exported="false" />
+        <activity
+            android:name=".RecentAptActivity"
+            android:exported="false" />
+        <activity
             android:name=".patientdashboard.reports.pdfviewer"
             android:exported="false" />
-
         <activity
             android:name=".LoginActivity"
             android:exported="false"

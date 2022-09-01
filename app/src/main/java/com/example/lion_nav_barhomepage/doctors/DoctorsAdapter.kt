@@ -39,6 +39,12 @@ class DoctorsAdapter(
 
 
          }
+             p0.details.setOnClickListener{
+                 int.go_to_main(p1)
+                 rep.replaceFragment(DoctorsProfileFragment())
+
+
+             }
         Log.e("on","array:${doc_list}")
     }
 
@@ -56,6 +62,7 @@ class DoctorsAdapter(
         val doc_spec = itemView.findViewById<TextView>(R.id.doctorspec)
         val doc_img = itemView.findViewById<ImageView>(R.id.doctorimg)
         val card =  itemView.findViewById<CardView>(R.id.card)
+        val details = itemView.findViewById<Button>(R.id.detailsbutton)
     }
     interface Click{
         fun go_to_main(R_id : Int)

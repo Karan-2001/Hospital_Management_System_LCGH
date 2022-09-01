@@ -9,7 +9,8 @@ data class data(
     var exp:String?=null,
     var avl: ArrayList<Int>?=null,
     var timeslots: List<List<Int>>?=null,
-    var lang: String?=null
+    var lang: String?=null,
+    var fee: String?=null
 )
 //var doc_01 = data(1,"name1",
 //    "spec1",

@@ -9,11 +9,15 @@
 
 
         <EditText
+            android:drawableLeft="@drawable/ic_baseline_search_24"
+            android:drawablePadding="10dp"
+            android:drawableTint="#022896"
+            android:background="@drawable/edittext1"
             android:id="@+id/search"
             android:layout_marginLeft="8dp"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="15dp"
             android:layout_marginRight="8dp"
             android:ems="10"
             android:hint="Search"
@@ -33,7 +37,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="8dp"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="75dp"
             android:layout_marginRight="8dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
 
